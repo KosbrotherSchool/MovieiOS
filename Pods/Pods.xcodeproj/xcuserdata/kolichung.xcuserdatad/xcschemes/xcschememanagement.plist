@@ -4,11 +4,6 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Alamofire.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Cosmos.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -32,22 +27,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>432ECC54282C84882B482CCB4CF227FC</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>608B49B5DDACC601EE8044A1931993F9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8ACD30C427F50B6EE0C0237CC6E3DFE9</key>
+		<key>7EC3B4E76B0F5A71CAD7C30E9499AEFA</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>99A64CCF1908AB8597464C4BE0E6E070</key>
+		<key>BCF57266B6516471B4E5EAA941F0A421</key>
 		<dict>
 			<key>primary</key>
 			<true/>

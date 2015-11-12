@@ -9,12 +9,13 @@
 import UIKit
 import Cosmos
 
-class MovieCollectionCell: UICollectionViewCell {
+class MovieCollectionCell: UICollectionViewCell{
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var pointLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var cosmosView: CosmosView!
+    
     
     func cancelRating(){
         cosmosView.settings.updateOnTouch = false
@@ -23,6 +24,7 @@ class MovieCollectionCell: UICollectionViewCell {
     func update(rating: Double) {
         cosmosView.rating = rating
     }
+    
     
 }
 

@@ -10,29 +10,29 @@ import UIKit
 
 class Movie {
     
-    var movie_id: Int;
-    var title: String;
-    var title_eng: String?;
-    var movie_class: String?;
-    var movie_type: String?;
-    var movie_length: String?;
-    var publish_date: String?;
-    var director: String?;
-    var editors: String?;
-    var actors: String?;
-    var official: String?;
-    var movie_info: String?;
-    var small_pic: String;
-    var large_pic: String;
-    var movie_round: Int?;
-    var photo_size: Int?;
-    var trailer_size: Int?;
-    var points: Double;
-    var review_size: Int;
-    var imdb_point: String?;
-    var imdb_link: String?;
-    var potato_point: String?;
-    var potato_link: String?;
+    var movie_id: Int
+    var title: String
+    var title_eng: String?
+    var movie_class: String?
+    var movie_type: String?
+    var movie_length: String?
+    var publish_date: String?
+    var director: String?
+    var editors: String?
+    var actors: String?
+    var official: String?
+    var movie_info: String?
+    var small_pic: String
+    var large_pic: String
+    var movie_round: Int?
+    var photo_size: Int?
+    var trailer_size: Int?
+    var points: Double
+    var review_size: Int
+    var imdb_point: String?
+    var imdb_link: String?
+    var potato_point: String?
+    var potato_link: String?
     //    var publish_date_date;
     
     init(movie_id: Int, title: String, small_pic: String, large_pic: String, points: Double, review_size: Int){

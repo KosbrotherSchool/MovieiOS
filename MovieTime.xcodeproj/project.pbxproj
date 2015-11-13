@@ -24,6 +24,7 @@
 		A697AC2F1BF34BAE003A4CFF /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A697AC2E1BF34BAE003A4CFF /* PhotoCell.swift */; };
 		A697AC381BF41EBC003A4CFF /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A697AC371BF41EBC003A4CFF /* ReviewViewController.swift */; };
 		A697AC3A1BF41F44003A4CFF /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = A697AC391BF41F44003A4CFF /* Review.swift */; };
+		A697AC3C1BF47BFF003A4CFF /* ReviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A697AC3B1BF47BFF003A4CFF /* ReviewCell.swift */; };
 		A69C19EE1BE9F1D400E95C71 /* TheaterTimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69C19ED1BE9F1D400E95C71 /* TheaterTimeCell.swift */; };
 		A69C19F11BEA02D900E95C71 /* TimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69C19F01BEA02D900E95C71 /* TimeCell.swift */; };
 		A69C19FF1BEA210600E95C71 /* Theater.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69C19FE1BEA210600E95C71 /* Theater.swift */; };
@@ -72,6 +73,7 @@
 		A697AC2E1BF34BAE003A4CFF /* PhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 		A697AC371BF41EBC003A4CFF /* ReviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
 		A697AC391BF41F44003A4CFF /* Review.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
+		A697AC3B1BF47BFF003A4CFF /* ReviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewCell.swift; sourceTree = "<group>"; };
 		A69C19ED1BE9F1D400E95C71 /* TheaterTimeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TheaterTimeCell.swift; sourceTree = "<group>"; };
 		A69C19F01BEA02D900E95C71 /* TimeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeCell.swift; sourceTree = "<group>"; };
 		A69C19FE1BEA210600E95C71 /* Theater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theater.swift; sourceTree = "<group>"; };
@@ -205,6 +207,7 @@
 				A69C19F01BEA02D900E95C71 /* TimeCell.swift */,
 				A697AC261BF2EB84003A4CFF /* TrailerCell.swift */,
 				A697AC2E1BF34BAE003A4CFF /* PhotoCell.swift */,
+				A697AC3B1BF47BFF003A4CFF /* ReviewCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -381,6 +384,7 @@
 				A6887FC21BE25BF700C87E78 /* MovieCollectionCell.swift in Sources */,
 				A697AC211BF1EE6F003A4CFF /* TrailerViewController.swift in Sources */,
 				A697AC2F1BF34BAE003A4CFF /* PhotoCell.swift in Sources */,
+				A697AC3C1BF47BFF003A4CFF /* ReviewCell.swift in Sources */,
 				A697AC271BF2EB84003A4CFF /* TrailerCell.swift in Sources */,
 				A69C19FF1BEA210600E95C71 /* Theater.swift in Sources */,
 				A663F7821BE33291000AD48E /* Movie.swift in Sources */,

@@ -10,7 +10,7 @@ import UIKit
 
 class Review {
     
-    var review_id:String!
+    var review_id:Int!
     var author:String!
     var title:String!
     var content:String!
@@ -18,7 +18,7 @@ class Review {
     var point:Double!
     var head_index:Int!
     
-    init(review_id:String, author:String, title:String, content:String, publish_date:String, point:Double, head_index:Int){
+    init(review_id:Int, author:String, title:String, content:String, publish_date:String, point:Double, head_index:Int){
         self.review_id = review_id
         self.author = author
         self.title = title

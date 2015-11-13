@@ -136,6 +136,11 @@ class MovieDetailViewController: UIViewController, UINavigationControllerDelegat
             let photoViewController = segue.destinationViewController as! PhotoViewController
             photoViewController.movie_id = self.theMovie!.movie_id
         }
+        if segue.identifier == "ReviewDetail" {
+            let reviewViewController = segue.destinationViewController as! ReviewViewController
+            reviewViewController.movie_id = self.theMovie!.movie_id
+        }
+
     }
     
     

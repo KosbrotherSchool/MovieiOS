@@ -136,11 +136,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MovieDetailViewController.swift"
-            timestampString = "468930276.546677"
+            timestampString = "469010233.400245"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "291"
-            endingLineNumber = "291"
+            startingLineNumber = "296"
+            endingLineNumber = "296"
             landmarkName = "getMovieInfo(_:)"
             landmarkType = "5">
          </BreakpointContent>

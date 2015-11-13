@@ -25,6 +25,8 @@
 		A697AC381BF41EBC003A4CFF /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A697AC371BF41EBC003A4CFF /* ReviewViewController.swift */; };
 		A697AC3A1BF41F44003A4CFF /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = A697AC391BF41F44003A4CFF /* Review.swift */; };
 		A697AC3C1BF47BFF003A4CFF /* ReviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A697AC3B1BF47BFF003A4CFF /* ReviewCell.swift */; };
+		A697AC3E1BF58AF3003A4CFF /* AreaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A697AC3D1BF58AF3003A4CFF /* AreaCell.swift */; };
+		A697AC401BF58B4E003A4CFF /* TheaterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A697AC3F1BF58B4E003A4CFF /* TheaterViewController.swift */; };
 		A69C19EE1BE9F1D400E95C71 /* TheaterTimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69C19ED1BE9F1D400E95C71 /* TheaterTimeCell.swift */; };
 		A69C19F11BEA02D900E95C71 /* TimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69C19F01BEA02D900E95C71 /* TimeCell.swift */; };
 		A69C19FF1BEA210600E95C71 /* Theater.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69C19FE1BEA210600E95C71 /* Theater.swift */; };
@@ -74,6 +76,8 @@
 		A697AC371BF41EBC003A4CFF /* ReviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
 		A697AC391BF41F44003A4CFF /* Review.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
 		A697AC3B1BF47BFF003A4CFF /* ReviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewCell.swift; sourceTree = "<group>"; };
+		A697AC3D1BF58AF3003A4CFF /* AreaCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AreaCell.swift; sourceTree = "<group>"; };
+		A697AC3F1BF58B4E003A4CFF /* TheaterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TheaterViewController.swift; sourceTree = "<group>"; };
 		A69C19ED1BE9F1D400E95C71 /* TheaterTimeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TheaterTimeCell.swift; sourceTree = "<group>"; };
 		A69C19F01BEA02D900E95C71 /* TimeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeCell.swift; sourceTree = "<group>"; };
 		A69C19FE1BEA210600E95C71 /* Theater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theater.swift; sourceTree = "<group>"; };
@@ -149,6 +153,7 @@
 				A697AC281BF2F4C7003A4CFF /* WebViewController.swift */,
 				A697AC2C1BF3331A003A4CFF /* PhotoViewController.swift */,
 				A697AC371BF41EBC003A4CFF /* ReviewViewController.swift */,
+				A697AC3F1BF58B4E003A4CFF /* TheaterViewController.swift */,
 			);
 			path = MovieTime;
 			sourceTree = "<group>";
@@ -208,6 +213,7 @@
 				A697AC261BF2EB84003A4CFF /* TrailerCell.swift */,
 				A697AC2E1BF34BAE003A4CFF /* PhotoCell.swift */,
 				A697AC3B1BF47BFF003A4CFF /* ReviewCell.swift */,
+				A697AC3D1BF58AF3003A4CFF /* AreaCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -393,9 +399,11 @@
 				A663F7841BE491D5000AD48E /* MovieDetailViewController.swift in Sources */,
 				A697AC3A1BF41F44003A4CFF /* Review.swift in Sources */,
 				A60D72221BE0F2030006CCD7 /* MovieViewController.swift in Sources */,
+				A697AC3E1BF58AF3003A4CFF /* AreaCell.swift in Sources */,
 				A697AC291BF2F4C7003A4CFF /* WebViewController.swift in Sources */,
 				A69C1A031BEA22F500E95C71 /* MovieTime.swift in Sources */,
 				A697AC381BF41EBC003A4CFF /* ReviewViewController.swift in Sources */,
+				A697AC401BF58B4E003A4CFF /* TheaterViewController.swift in Sources */,
 				A69C19EE1BE9F1D400E95C71 /* TheaterTimeCell.swift in Sources */,
 				A697AC2D1BF3331A003A4CFF /* PhotoViewController.swift in Sources */,
 			);

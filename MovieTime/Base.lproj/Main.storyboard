@@ -149,25 +149,42 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Third View" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="xQi-FN-TT1">
-                                <rect key="frame" x="215" y="279" width="170" height="42"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="36"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="DBQ-8y-c8c">
+                                <rect key="frame" x="0.0" y="64" width="600" height="487"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="xM0-RQ-bYE">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="m3a-br-TFo">
+                                        <rect key="frame" x="0.0" y="64" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="xQi-FN-TT1" firstAttribute="centerX" secondItem="Whj-hC-Xuv" secondAttribute="centerX" id="Ain-58-xyR"/>
-                            <constraint firstItem="xQi-FN-TT1" firstAttribute="centerY" secondItem="Whj-hC-Xuv" secondAttribute="centerY" id="IQe-Jg-qOn"/>
+                            <constraint firstItem="DBQ-8y-c8c" firstAttribute="top" secondItem="idW-6d-SZb" secondAttribute="bottom" id="5Hf-Tc-Ok4"/>
+                            <constraint firstItem="DBQ-8y-c8c" firstAttribute="bottom" secondItem="0EN-zd-ZyZ" secondAttribute="top" id="6c2-pT-vHu"/>
+                            <constraint firstAttribute="trailing" secondItem="DBQ-8y-c8c" secondAttribute="trailing" id="ZZM-aK-Bce"/>
+                            <constraint firstItem="DBQ-8y-c8c" firstAttribute="leading" secondItem="Whj-hC-Xuv" secondAttribute="leading" id="gC1-4D-IYe"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="影評" id="aYO-WT-RMc"/>
+                    <navigationItem key="navigationItem" title="影評" id="aYO-WT-RMc">
+                        <barButtonItem key="rightBarButtonItem" title="部落客" id="Ptc-ea-0c6"/>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4sD-H9-wcC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="812" y="789"/>
+            <point key="canvasLocation" x="-852" y="1549"/>
         </scene>
         <!--電影內頁-->
         <scene sceneID="fJZ-Su-7wC">
@@ -1027,7 +1044,7 @@
         <!--影院-->
         <scene sceneID="wg7-f3-ORb">
             <objects>
-                <viewController id="8rJ-Kc-sve" customClass="SecondViewController" customModule="MovieTime" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="8rJ-Kc-sve" customClass="TheaterViewController" customModule="MovieTime" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="L7p-HK-0SC"/>
                         <viewControllerLayoutGuide type="bottom" id="Djb-ko-YwX"/>
@@ -1045,21 +1062,41 @@
                             </segmentedControl>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="o1M-pf-7uS">
                                 <rect key="frame" x="0.0" y="108" width="600" height="443"/>
+                                <color key="backgroundColor" red="0.93665167299999996" green="0.93665167299999996" blue="0.93665167299999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="bcw-g0-MCS">
-                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="itemSize" width="306" height="203"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="nFF-ag-cqd">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AreaCell" id="nFF-ag-cqd" customClass="AreaCell" customModule="MovieTime" customModuleProvider="target">
+                                        <rect key="frame" x="147" y="0.0" width="306" height="203"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="306" height="203"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="台北北區" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IQJ-oc-mF0">
+                                                    <rect key="frame" x="8" y="8" width="290" height="187"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="IQJ-oc-mF0" firstAttribute="top" secondItem="nFF-ag-cqd" secondAttribute="topMargin" id="NT4-aN-wuI"/>
+                                            <constraint firstItem="IQJ-oc-mF0" firstAttribute="trailing" secondItem="nFF-ag-cqd" secondAttribute="trailingMargin" id="boL-i8-cpJ"/>
+                                            <constraint firstItem="IQJ-oc-mF0" firstAttribute="leading" secondItem="nFF-ag-cqd" secondAttribute="leadingMargin" id="ds7-R7-YM2"/>
+                                            <constraint firstItem="IQJ-oc-mF0" firstAttribute="bottom" secondItem="nFF-ag-cqd" secondAttribute="bottomMargin" id="exB-cI-K4X"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="areaLabel" destination="IQJ-oc-mF0" id="yPq-da-D6V"/>
+                                            <segue destination="nxV-E2-0L9" kind="show" id="bWk-XD-Bq9"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
@@ -1078,10 +1115,61 @@
                     <navigationItem key="navigationItem" title="影院" id="zLx-xt-Du3">
                         <barButtonItem key="rightBarButtonItem" image="love" id="qqD-Fg-GPP"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="collectionView" destination="o1M-pf-7uS" id="NWi-kq-Cpt"/>
+                        <outlet property="segmentControl" destination="2oi-Oz-drP" id="r4s-vb-cbR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2414" y="1120"/>
+        </scene>
+        <!--區域戲院-->
+        <scene sceneID="hh4-sJ-ma6">
+            <objects>
+                <viewController id="nxV-E2-0L9" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="hek-rt-tBh"/>
+                        <viewControllerLayoutGuide type="bottom" id="h5Z-gW-vvz"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="s3U-eC-9sT">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ZW3-Ew-fEI">
+                                <rect key="frame" x="0.0" y="64" width="600" height="487"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="kYP-nQ-LDb">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="QSL-8y-Kd9">
+                                        <rect key="frame" x="0.0" y="64" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ZW3-Ew-fEI" firstAttribute="top" secondItem="hek-rt-tBh" secondAttribute="bottom" id="1zP-u5-omb"/>
+                            <constraint firstItem="ZW3-Ew-fEI" firstAttribute="leading" secondItem="s3U-eC-9sT" secondAttribute="leading" id="5Uy-XW-FNO"/>
+                            <constraint firstItem="ZW3-Ew-fEI" firstAttribute="bottom" secondItem="h5Z-gW-vvz" secondAttribute="top" id="Sb5-SO-zHd"/>
+                            <constraint firstAttribute="trailing" secondItem="ZW3-Ew-fEI" secondAttribute="trailing" id="uuD-oD-Fe5"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="區域戲院" id="u8c-T8-fqf"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NO8-1G-ZMe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3245" y="1120"/>
         </scene>
         <!--哈拉區-->
         <scene sceneID="zhE-JY-Vl7">

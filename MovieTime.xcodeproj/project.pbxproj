@@ -18,6 +18,8 @@
 		A66B3B171BF587D800B39508 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66B3B161BF587D800B39508 /* Message.swift */; };
 		A66B3B191BF58A9500B39508 /* MovieNews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66B3B181BF58A9500B39508 /* MovieNews.swift */; };
 		A66B3B1B1BF58DB700B39508 /* MovieRank.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66B3B1A1BF58DB700B39508 /* MovieRank.swift */; };
+		A66B3B1D1BF5CBE500B39508 /* BlogPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66B3B1C1BF5CBE500B39508 /* BlogPostCell.swift */; };
+		A66B3B1F1BF5CDDB00B39508 /* BlogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66B3B1E1BF5CDDB00B39508 /* BlogViewController.swift */; };
 		A6887FC01BE21C4000C87E78 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A6887FBF1BE21C4000C87E78 /* Assets.xcassets */; };
 		A6887FC21BE25BF700C87E78 /* MovieCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6887FC11BE25BF700C87E78 /* MovieCollectionCell.swift */; };
 		A697AC211BF1EE6F003A4CFF /* TrailerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A697AC201BF1EE6F003A4CFF /* TrailerViewController.swift */; };
@@ -74,6 +76,8 @@
 		A66B3B161BF587D800B39508 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		A66B3B181BF58A9500B39508 /* MovieNews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieNews.swift; sourceTree = "<group>"; };
 		A66B3B1A1BF58DB700B39508 /* MovieRank.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieRank.swift; sourceTree = "<group>"; };
+		A66B3B1C1BF5CBE500B39508 /* BlogPostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlogPostCell.swift; sourceTree = "<group>"; };
+		A66B3B1E1BF5CDDB00B39508 /* BlogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlogViewController.swift; sourceTree = "<group>"; };
 		A6887FBF1BE21C4000C87E78 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Assets.xcassets/Assets.xcassets; sourceTree = "<group>"; };
 		A6887FC11BE25BF700C87E78 /* MovieCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieCollectionCell.swift; sourceTree = "<group>"; };
 		A697AC201BF1EE6F003A4CFF /* TrailerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrailerViewController.swift; sourceTree = "<group>"; };
@@ -164,6 +168,7 @@
 				A697AC2C1BF3331A003A4CFF /* PhotoViewController.swift */,
 				A697AC371BF41EBC003A4CFF /* ReviewViewController.swift */,
 				A697AC3F1BF58B4E003A4CFF /* TheaterViewController.swift */,
+				A66B3B1E1BF5CDDB00B39508 /* BlogViewController.swift */,
 			);
 			path = MovieTime;
 			sourceTree = "<group>";
@@ -229,6 +234,7 @@
 				A697AC2E1BF34BAE003A4CFF /* PhotoCell.swift */,
 				A697AC3B1BF47BFF003A4CFF /* ReviewCell.swift */,
 				A697AC3D1BF58AF3003A4CFF /* AreaCell.swift */,
+				A66B3B1C1BF5CBE500B39508 /* BlogPostCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -403,8 +409,10 @@
 				A69C1A011BEA225600E95C71 /* Area.swift in Sources */,
 				A69C19F11BEA02D900E95C71 /* TimeCell.swift in Sources */,
 				A6887FC21BE25BF700C87E78 /* MovieCollectionCell.swift in Sources */,
+				A66B3B1D1BF5CBE500B39508 /* BlogPostCell.swift in Sources */,
 				A697AC211BF1EE6F003A4CFF /* TrailerViewController.swift in Sources */,
 				A697AC2F1BF34BAE003A4CFF /* PhotoCell.swift in Sources */,
+				A66B3B1F1BF5CDDB00B39508 /* BlogViewController.swift in Sources */,
 				A697AC3C1BF47BFF003A4CFF /* ReviewCell.swift in Sources */,
 				A697AC271BF2EB84003A4CFF /* TrailerCell.swift in Sources */,
 				A69C19FF1BEA210600E95C71 /* Theater.swift in Sources */,

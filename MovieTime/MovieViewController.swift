@@ -13,7 +13,7 @@ import Cosmos
 
 
 
-class FirstViewController: UIViewController,UICollectionViewDelegateFlowLayout,UICollectionViewDataSource {
+class MovieViewController: UIViewController,UICollectionViewDelegateFlowLayout,UICollectionViewDataSource {
     
     let sectionInsets = UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0)
     var rankMovies = [Movie]()

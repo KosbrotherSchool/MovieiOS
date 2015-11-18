@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="B0i-Dk-zMc">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+    </dependencies>
+    <scenes>
+        <!--哈拉區-->
+        <scene sceneID="zhE-JY-Vl7">
+            <objects>
+                <viewController id="Bup-HR-vF1" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="9bv-Bo-hXY"/>
+                        <viewControllerLayoutGuide type="bottom" id="1N7-eb-Scw"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="yrJ-BW-3sB">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Fourth View" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="pss-vr-uAS">
+                                <rect key="frame" x="204" y="279" width="192" height="42"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="36"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="pss-vr-uAS" firstAttribute="centerY" secondItem="yrJ-BW-3sB" secondAttribute="centerY" id="WvY-GW-yGr"/>
+                            <constraint firstItem="pss-vr-uAS" firstAttribute="centerX" secondItem="yrJ-BW-3sB" secondAttribute="centerX" id="s7H-3x-cTp"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="哈拉區" id="OTA-fI-1H7"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="c1u-mL-ttI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1562" y="-1024"/>
+        </scene>
+        <!--哈拉區-->
+        <scene sceneID="gW1-cA-nSd">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="B0i-Dk-zMc" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="哈拉區" image="discuss" id="nFh-nW-tGL"/>
+                    <toolbarItems/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="6IO-nI-HfZ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Bup-HR-vF1" kind="relationship" relationship="rootViewController" id="vPe-L3-bjb"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6Z2-HM-LaO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="750" y="-1024"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="discuss" width="25" height="25"/>
+    </resources>
+</document>

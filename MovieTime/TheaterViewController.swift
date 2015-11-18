@@ -23,6 +23,21 @@ class TheaterViewController: UIViewController,UICollectionViewDelegateFlowLayout
         collectionView.dataSource = self
     }
     
+    
+    // MARK Navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "AreaTheaterSegue" {
+            let areaTheaterViewController = segue.destinationViewController as! AreaTheaterViewController
+            if let selecteCell = sender as? AreaCell {
+                let indexPath = collectionView.indexPathForCell(selecteCell)!
+                let selectedArea = areas[indexPath.row]
+                areaTheaterViewController.area_id = selectedArea.area_id!
+            }
+            
+        }
+    }
+    
+    
     // MARK spacing of collectionview
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
         return 5.0

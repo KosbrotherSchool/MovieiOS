@@ -44,8 +44,8 @@ class ReviewViewController: UIViewController,UICollectionViewDelegateFlowLayout,
             
             let cell_width = collectionView.frame.size.width-20
             
-            let font = UIFont(name: "Verdana", size: 18)
-            let cell_height = self.heightForLabel(self.reviews[indexPath.row].content , font: font!, width: cell_width) + 70
+            let font = UIFont(name: "Helvetica", size: 17)
+            let cell_height = self.heightForLabel(self.reviews[indexPath.row].content , font: font!, width: cell_width-16) + 80
             
             return CGSize(width: cell_width, height: cell_height)
             

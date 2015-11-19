@@ -15,17 +15,80 @@ class BlogViewController: UIViewController,UICollectionViewDelegateFlowLayout,UI
     @IBOutlet weak var segmentControl: UISegmentedControl!
     @IBOutlet weak var collectionView: UICollectionView!
     
+    @IBAction func segmentChange(sender: UISegmentedControl) {
+        
+        switch self.segmentControl.selectedSegmentIndex
+        {
+        case 0:
+            if blogPosts.count == 0{
+                getBlogPosts(1)
+            }else{
+                self.collectionView.reloadData()
+                self.collectionView.scrollToItemAtIndexPath(NSIndexPath.init(forItem: 0, inSection: 0), atScrollPosition: UICollectionViewScrollPosition.Top, animated: true)
+            }
+        case 1:
+            if newses.count == 0{
+                getNewses(1)
+            }else{
+                self.collectionView.reloadData()
+                self.collectionView.scrollToItemAtIndexPath(NSIndexPath.init(forItem: 0, inSection: 0), atScrollPosition: UICollectionViewScrollPosition.Top, animated: true)
+            }
+        default:
+            break;
+        }
+        
+    }
+    
     var blogPosts = [BlogPost]()
+    var newses = [MovieNews]()
+    var refreshControl:UIRefreshControl!
+    var isBlogLoadingMore = false
+    var isNewsLoadingMore = false
+    var blogCurrentPage = 1
+    var newsCurrentPage = 1
     
     override func viewDidLoad() {
         
         collectionView.delegate = self
         collectionView.dataSource = self
         
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+        collectionView.addSubview(refreshControl)
         // Mark get posts from net
         getBlogPosts(1)
     }
     
+    func refresh(sender:AnyObject)
+    {
+        self.refreshControl.endRefreshing()
+    }
+    
+    
+    // MARK Navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "PostWebSegue" {
+            let webViewController = segue.destinationViewController as! WebViewController
+            if let selecteCell = sender as? BlogPostCell {
+                let indexPath = collectionView.indexPathForCell(selecteCell)!
+                switch self.segmentControl.selectedSegmentIndex
+                {
+                case 0:
+                    let selectedPost = blogPosts[indexPath.row]
+                    webViewController.url = selectedPost.blogPost_link
+                    webViewController.title = selectedPost.blogPost_title
+                case 1:
+                    let selectedNews = newses[indexPath.row]
+                    webViewController.url = selectedNews.movienews_new_link
+                    webViewController.title = selectedNews.movienews_title
+                default:
+                    break
+                }
+            }
+            
+        }
+        
+    }
     
     // MARK spacing of collectionview
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
@@ -57,7 +120,40 @@ class BlogViewController: UIViewController,UICollectionViewDelegateFlowLayout,UI
     
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        switch self.segmentControl.selectedSegmentIndex{
+        case 0:
+            return blogPosts.count
+        case 1:
+            return newses.count
+        default:
+            0
+        }
         return blogPosts.count
+    }
+    
+    func collectionView(collectionView: UICollectionView,willDisplayCell cell: UICollectionViewCell,forItemAtIndexPath indexPath: NSIndexPath){
+        
+        switch segmentControl.selectedSegmentIndex{
+            case 0:
+                if indexPath.row == self.blogPosts.count-1 {
+                    if !isBlogLoadingMore{
+                        print("load more blogs")
+                        blogCurrentPage++
+                        getBlogPosts(blogCurrentPage)
+                    }
+                }
+            case 1:
+                if indexPath.row == self.newses.count-1{
+                    if !isNewsLoadingMore{
+                        print("load more news")
+                        newsCurrentPage++
+                        getNewses(newsCurrentPage)
+                    }
+                }
+            default:
+                break
+        }
+        
     }
     
     
@@ -65,13 +161,24 @@ class BlogViewController: UIViewController,UICollectionViewDelegateFlowLayout,UI
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("BlogCell", forIndexPath: indexPath) as! BlogPostCell
         
-        let blogPost = self.blogPosts[indexPath.row]
-        
-        cell.postTitle.text = blogPost.blogPost_title
-        cell.publishDate.text = blogPost.blogPost_pub_date
-        
-        let picURL = NSURL(string: blogPost.blogPost_pic_link )!
-        cell.postImage.kf_setImageWithURL(picURL)
+        switch self.segmentControl.selectedSegmentIndex{
+        case 0:
+            let blogPost = self.blogPosts[indexPath.row]
+            
+            cell.postTitle.text = blogPost.blogPost_title
+            cell.publishDate.text = blogPost.blogPost_pub_date
+            
+            let picURL = NSURL(string: blogPost.blogPost_pic_link )!
+            cell.postImage.kf_setImageWithURL(picURL)
+        case 1:
+            let news = self.newses[indexPath.row]
+            cell.postTitle.text = news.movienews_title
+            cell.publishDate.text = news.movienews_publish_day
+            let picURL = NSURL(string: news.movienews_pic_link )!
+            cell.postImage.kf_setImageWithURL(picURL)
+        default:
+            break
+        }
         
         return cell
     }
@@ -80,6 +187,7 @@ class BlogViewController: UIViewController,UICollectionViewDelegateFlowLayout,UI
     
     func getBlogPosts(page: Int)
     {
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         let url = NSURL(string: host + "/api/movie/blog_posts?page="+String(page))
         let config = NSURLSessionConfiguration.defaultSessionConfiguration()
         let session = NSURLSession(configuration: config)
@@ -109,7 +217,59 @@ class BlogViewController: UIViewController,UICollectionViewDelegateFlowLayout,UI
             dispatch_async(dispatch_get_global_queue(priority, 0)) {
                 
                 dispatch_async(dispatch_get_main_queue()) {
+                    UIApplication.sharedApplication().networkActivityIndicatorVisible = false
                     self.collectionView.reloadData()
+                }
+                
+            }
+            
+        })
+        
+        task.resume()
+        print(NSDate())
+    }
+    
+    func getNewses(page: Int)
+    {
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+        let url = NSURL(string: host + "/api/movie/news?news_type=1&page="+String(page))
+        let config = NSURLSessionConfiguration.defaultSessionConfiguration()
+        let session = NSURLSession(configuration: config)
+        let req = NSURLRequest(URL: url!)
+        
+        //NSURLSessionDownloadTask is retured from session.dataTaskWithRequest
+        let task = session.dataTaskWithRequest(req, completionHandler: {
+            (data, resp, err) in
+            
+            // Do Something after got data
+            let jsonData = JSON(data: data!)
+            
+            for theNews in jsonData.arrayValue{
+                let movienews_title = theNews["title"].stringValue
+                let movienews_info = theNews["info"].stringValue
+                let movienews_new_link = theNews["news_link"].stringValue
+                let movienews_publish_day = theNews["publish_day"].stringValue
+                let movienews_pic_link = theNews["pic_link"].stringValue
+                let movienews_news_type = 1
+                let movienews_news_id = 0
+                
+                let newNews = MovieNews.init(movienews_title: movienews_title, movienews_info: movienews_info, movienews_new_link: movienews_new_link, movienews_publish_day: movienews_publish_day, movienews_pic_link: movienews_pic_link, movienews_news_type: movienews_news_type, movienews_news_id: movienews_news_id)
+                
+                // add BlogPost to blogPosts
+                self.newses.append(newNews)
+            }
+            
+            // update UI
+            let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+            dispatch_async(dispatch_get_global_queue(priority, 0)) {
+                
+                dispatch_async(dispatch_get_main_queue()) {
+                    UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+                    self.collectionView.reloadData()
+                    if self.newsCurrentPage == 1{
+                        self.collectionView.scrollToItemAtIndexPath(NSIndexPath.init(forItem: 0, inSection: 0), atScrollPosition: UICollectionViewScrollPosition.Top, animated: true)
+                    }
+                    
                 }
                 
             }

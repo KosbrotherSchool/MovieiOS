@@ -14,12 +14,18 @@ class WebViewController: UIViewController, WKNavigationDelegate{
     var webView: WKWebView
     @IBOutlet weak var progressView: UIProgressView!
     var url:String!
+    var web_title:String?
     
     required init?(coder aDecoder: NSCoder) {
         self.webView = WKWebView(frame: CGRectZero)
         super.init(coder: aDecoder)
         
         self.webView.navigationDelegate = self
+        
+        if let the_title = web_title {
+            self.title! = the_title
+        }
+        
     }
     
     deinit {
@@ -38,7 +44,7 @@ class WebViewController: UIViewController, WKNavigationDelegate{
         
         webView.addObserver(self, forKeyPath: "estimatedProgress", options: .New, context: nil)
         
-        let nsUrl = NSURL(string: url)
+        let nsUrl = NSURL(string: url.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)! )
         let request = NSURLRequest(URL:nsUrl!)
         webView.loadRequest(request)
         

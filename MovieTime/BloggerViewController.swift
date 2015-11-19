@@ -24,6 +24,20 @@ class BloggerViewController: UIViewController,UICollectionViewDelegateFlowLayout
         
     }
     
+    // MARK Navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "BloggerWebSegue" {
+            let webViewController = segue.destinationViewController as! WebViewController
+            if let selecteCell = sender as? BlogCell {
+                let indexPath = collectionView.indexPathForCell(selecteCell)!
+                let selectedBlogger = bloggers[indexPath.row]
+                webViewController.url = selectedBlogger.blogger_url
+                webViewController.title = selectedBlogger.blogger_name
+            }
+        }
+        
+    }
+    
     
     // MARK spacing of collectionview
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {

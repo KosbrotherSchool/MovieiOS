@@ -25,6 +25,9 @@
                                     <segment title="影評"/>
                                     <segment title="新聞"/>
                                 </segments>
+                                <connections>
+                                    <action selector="segmentChange:" destination="xJD-uB-h99" eventType="valueChanged" id="5wR-nO-mE5"/>
+                                </connections>
                             </segmentedControl>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="DBQ-8y-c8c">
                                 <rect key="frame" x="0.0" y="108" width="600" height="443"/>
@@ -50,12 +53,6 @@
                                                         <constraint firstAttribute="height" constant="100" id="sdL-4K-Mfc"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="標題" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dYK-8M-0vb">
-                                                    <rect key="frame" x="116" y="1" width="358" height="71"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="日期" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RJd-hW-OQx">
                                                     <rect key="frame" x="116" y="80" width="358" height="21"/>
                                                     <constraints>
@@ -65,25 +62,32 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="標題" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dYK-8M-0vb">
+                                                    <rect key="frame" x="116" y="1" width="358" height="78"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstItem="dYK-8M-0vb" firstAttribute="top" secondItem="FsF-0i-RfY" secondAttribute="top" id="1Vp-Dt-pxf"/>
-                                            <constraint firstItem="RJd-hW-OQx" firstAttribute="top" secondItem="dYK-8M-0vb" secondAttribute="bottom" constant="8" symbolic="YES" id="9aC-JC-d8g"/>
-                                            <constraint firstItem="dYK-8M-0vb" firstAttribute="leading" secondItem="FsF-0i-RfY" secondAttribute="trailing" constant="8" symbolic="YES" id="Amd-1s-A3N"/>
-                                            <constraint firstAttribute="trailingMargin" secondItem="dYK-8M-0vb" secondAttribute="trailing" id="F7T-Mf-Ude"/>
+                                            <constraint firstItem="dYK-8M-0vb" firstAttribute="trailing" secondItem="RJd-hW-OQx" secondAttribute="trailing" id="3mQ-LZ-az1"/>
+                                            <constraint firstItem="dYK-8M-0vb" firstAttribute="top" secondItem="FsF-0i-RfY" secondAttribute="top" id="Uxw-m4-JSd"/>
+                                            <constraint firstItem="RJd-hW-OQx" firstAttribute="top" secondItem="dYK-8M-0vb" secondAttribute="bottom" constant="1" id="c1m-7L-daY"/>
                                             <constraint firstItem="FsF-0i-RfY" firstAttribute="leading" secondItem="m3a-br-TFo" secondAttribute="leadingMargin" id="i5J-Tg-d2V"/>
                                             <constraint firstItem="RJd-hW-OQx" firstAttribute="trailing" secondItem="m3a-br-TFo" secondAttribute="trailingMargin" id="jVO-ph-r0E"/>
-                                            <constraint firstItem="RJd-hW-OQx" firstAttribute="leading" secondItem="dYK-8M-0vb" secondAttribute="leading" id="kUU-fA-7dc"/>
                                             <constraint firstItem="FsF-0i-RfY" firstAttribute="centerY" secondItem="m3a-br-TFo" secondAttribute="centerY" id="lRR-hV-OYZ"/>
+                                            <constraint firstItem="dYK-8M-0vb" firstAttribute="leading" secondItem="RJd-hW-OQx" secondAttribute="leading" id="p81-DX-ifN"/>
+                                            <constraint firstItem="dYK-8M-0vb" firstAttribute="leading" secondItem="FsF-0i-RfY" secondAttribute="trailing" constant="8" symbolic="YES" id="ufZ-WN-2wj"/>
                                             <constraint firstItem="RJd-hW-OQx" firstAttribute="bottom" secondItem="FsF-0i-RfY" secondAttribute="bottom" id="znI-Cu-GKl"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="postImage" destination="FsF-0i-RfY" id="seQ-8a-86c"/>
                                             <outlet property="postTitle" destination="dYK-8M-0vb" id="kLS-07-1Mh"/>
                                             <outlet property="publishDate" destination="RJd-hW-OQx" id="eSB-vX-7Ld"/>
+                                            <segue destination="504-g2-bQt" kind="show" identifier="PostWebSegue" id="gMI-rw-RvZ"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -173,6 +177,7 @@
                                         <connections>
                                             <outlet property="imageView" destination="dh3-Yw-yuh" id="Wgg-Ws-H0C"/>
                                             <outlet property="label" destination="QrZ-g2-Bad" id="zED-Br-FgQ"/>
+                                            <segue destination="504-g2-bQt" kind="show" identifier="BloggerWebSegue" id="H2Q-IU-cCK"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -213,10 +218,45 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="akl-Uv-5Bm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="0.0" y="789"/>
+            <point key="canvasLocation" x="-441" y="809"/>
+        </scene>
+        <!--WebTitle-->
+        <scene sceneID="T23-nH-x3U">
+            <objects>
+                <viewController id="504-g2-bQt" customClass="WebViewController" customModule="MovieTime" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="GGF-a3-My1"/>
+                        <viewControllerLayoutGuide type="bottom" id="9yf-x4-bmg"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="7db-ON-Cqw">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="n3C-6f-zir">
+                                <rect key="frame" x="0.0" y="64" width="600" height="2"/>
+                            </progressView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="n3C-6f-zir" firstAttribute="top" secondItem="GGF-a3-My1" secondAttribute="bottom" id="2d4-J8-gb3"/>
+                            <constraint firstAttribute="trailing" secondItem="n3C-6f-zir" secondAttribute="trailing" id="du2-ic-jrv"/>
+                            <constraint firstItem="n3C-6f-zir" firstAttribute="leading" secondItem="7db-ON-Cqw" secondAttribute="leading" id="jnO-B2-stM"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="WebTitle" id="8uj-N3-KUz"/>
+                    <connections>
+                        <outlet property="progressView" destination="n3C-6f-zir" id="LfB-2i-v4t"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="erq-jW-gX2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-29" y="2371"/>
         </scene>
     </scenes>
     <resources>
         <image name="blog" width="22" height="22"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="gMI-rw-RvZ"/>
+    </inferredMetricsTieBreakers>
 </document>

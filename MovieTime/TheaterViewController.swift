@@ -16,7 +16,6 @@ class TheaterViewController: UIViewController,UICollectionViewDelegateFlowLayout
     @IBOutlet weak var segmentControl: UISegmentedControl!
     @IBOutlet weak var collectionView: UICollectionView!
     
-    
     override func viewDidLoad() {
         areas = Area.getAreas()
         collectionView.delegate = self

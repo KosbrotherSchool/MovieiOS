@@ -42,6 +42,10 @@
 		A697AC481BF879B5003A4CFF /* TheaterTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A697AC471BF879B5003A4CFF /* TheaterTimeViewController.swift */; };
 		A697ACAD1BFC1400003A4CFF /* Halla.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A697ACAB1BFC1400003A4CFF /* Halla.storyboard */; };
 		A697AD1B1BFC2230003A4CFF /* Review.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A697AD191BFC2230003A4CFF /* Review.storyboard */; };
+		A697AD851BFE04A1003A4CFF /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A697AD831BFE04A1003A4CFF /* Model.xcdatamodeld */; };
+		A697AD881BFE0575003A4CFF /* FavTheater+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A697AD861BFE0575003A4CFF /* FavTheater+CoreDataProperties.swift */; };
+		A697AD891BFE0575003A4CFF /* FavTheater.swift in Sources */ = {isa = PBXBuildFile; fileRef = A697AD871BFE0575003A4CFF /* FavTheater.swift */; };
+		A697AD8C1BFE0D1D003A4CFF /* FavTheaterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A697AD8B1BFE0D1D003A4CFF /* FavTheaterViewController.swift */; };
 		A69C19EE1BE9F1D400E95C71 /* TheaterTimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69C19ED1BE9F1D400E95C71 /* TheaterTimeCell.swift */; };
 		A69C19F11BEA02D900E95C71 /* TimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69C19F01BEA02D900E95C71 /* TimeCell.swift */; };
 		A69C19FF1BEA210600E95C71 /* Theater.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69C19FE1BEA210600E95C71 /* Theater.swift */; };
@@ -108,6 +112,10 @@
 		A697AC471BF879B5003A4CFF /* TheaterTimeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TheaterTimeViewController.swift; sourceTree = "<group>"; };
 		A697ACAC1BFC1400003A4CFF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Halla.storyboard; sourceTree = "<group>"; };
 		A697AD1A1BFC2230003A4CFF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Review.storyboard; sourceTree = "<group>"; };
+		A697AD841BFE04A1003A4CFF /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		A697AD861BFE0575003A4CFF /* FavTheater+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FavTheater+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		A697AD871BFE0575003A4CFF /* FavTheater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavTheater.swift; sourceTree = "<group>"; };
+		A697AD8B1BFE0D1D003A4CFF /* FavTheaterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavTheaterViewController.swift; sourceTree = "<group>"; };
 		A69C19ED1BE9F1D400E95C71 /* TheaterTimeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TheaterTimeCell.swift; sourceTree = "<group>"; };
 		A69C19F01BEA02D900E95C71 /* TimeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeCell.swift; sourceTree = "<group>"; };
 		A69C19FE1BEA210600E95C71 /* Theater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theater.swift; sourceTree = "<group>"; };
@@ -172,6 +180,7 @@
 		A60D721E1BE0F2030006CCD7 /* MovieTime */ = {
 			isa = PBXGroup;
 			children = (
+				A697AD8A1BFE057B003A4CFF /* CoreData */,
 				A697AD1C1BFC2350003A4CFF /* StoryBoards */,
 				A69C19EF1BEA02A400E95C71 /* Cells */,
 				A69C19E81BE61C9500E95C71 /* SupprotFiles */,
@@ -188,6 +197,7 @@
 				A66B3B221BF6CE4000B39508 /* BloggerViewController.swift */,
 				A697AC431BF86EF1003A4CFF /* AreaTheaterViewController.swift */,
 				A697AC471BF879B5003A4CFF /* TheaterTimeViewController.swift */,
+				A697AD8B1BFE0D1D003A4CFF /* FavTheaterViewController.swift */,
 			);
 			path = MovieTime;
 			sourceTree = "<group>";
@@ -240,6 +250,16 @@
 				A697ACAB1BFC1400003A4CFF /* Halla.storyboard */,
 			);
 			name = StoryBoards;
+			sourceTree = "<group>";
+		};
+		A697AD8A1BFE057B003A4CFF /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				A697AD831BFE04A1003A4CFF /* Model.xcdatamodeld */,
+				A697AD861BFE0575003A4CFF /* FavTheater+CoreDataProperties.swift */,
+				A697AD871BFE0575003A4CFF /* FavTheater.swift */,
+			);
+			name = CoreData;
 			sourceTree = "<group>";
 		};
 		A69C19E81BE61C9500E95C71 /* SupprotFiles */ = {
@@ -448,21 +468,25 @@
 				A697AC2F1BF34BAE003A4CFF /* PhotoCell.swift in Sources */,
 				A66B3B1F1BF5CDDB00B39508 /* BlogViewController.swift in Sources */,
 				A697AC461BF878E9003A4CFF /* TheaterCell.swift in Sources */,
+				A697AD8C1BFE0D1D003A4CFF /* FavTheaterViewController.swift in Sources */,
 				A697AC3C1BF47BFF003A4CFF /* ReviewCell.swift in Sources */,
 				A697AC271BF2EB84003A4CFF /* TrailerCell.swift in Sources */,
 				A69C19FF1BEA210600E95C71 /* Theater.swift in Sources */,
+				A697AD881BFE0575003A4CFF /* FavTheater+CoreDataProperties.swift in Sources */,
 				A663F7821BE33291000AD48E /* Movie.swift in Sources */,
 				A66B3B211BF6CBD100B39508 /* BlogCell.swift in Sources */,
 				A60D72201BE0F2030006CCD7 /* AppDelegate.swift in Sources */,
 				A697AC251BF2E476003A4CFF /* Trailer.swift in Sources */,
 				A697AC421BF86E50003A4CFF /* AreaTheaterCell.swift in Sources */,
 				A663F7841BE491D5000AD48E /* MovieDetailViewController.swift in Sources */,
+				A697AD851BFE04A1003A4CFF /* Model.xcdatamodeld in Sources */,
 				A697AC3A1BF41F44003A4CFF /* Review.swift in Sources */,
 				A60D72221BE0F2030006CCD7 /* MovieViewController.swift in Sources */,
 				A697AC3E1BF58AF3003A4CFF /* AreaCell.swift in Sources */,
 				A697AC291BF2F4C7003A4CFF /* WebViewController.swift in Sources */,
 				A69C1A031BEA22F500E95C71 /* MovieTime.swift in Sources */,
 				A66B3B151BF582D000B39508 /* BlogPost.swift in Sources */,
+				A697AD891BFE0575003A4CFF /* FavTheater.swift in Sources */,
 				A66B3B171BF587D800B39508 /* Message.swift in Sources */,
 				A66B3B191BF58A9500B39508 /* MovieNews.swift in Sources */,
 				A697AC381BF41EBC003A4CFF /* ReviewViewController.swift in Sources */,
@@ -687,6 +711,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		A697AD831BFE04A1003A4CFF /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				A697AD841BFE04A1003A4CFF /* Model.xcdatamodel */,
+			);
+			currentVersion = A697AD841BFE04A1003A4CFF /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = A60D72141BE0F2030006CCD7 /* Project object */;
 }

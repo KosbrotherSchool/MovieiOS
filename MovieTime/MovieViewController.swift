@@ -10,7 +10,7 @@ import UIKit
 import SwiftyJSON
 import Kingfisher
 import Cosmos
-
+import CoreData
 
 
 class MovieViewController: UIViewController,UICollectionViewDelegateFlowLayout,UICollectionViewDataSource {
@@ -69,6 +69,8 @@ class MovieViewController: UIViewController,UICollectionViewDelegateFlowLayout,U
         }
     }
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -80,6 +82,9 @@ class MovieViewController: UIViewController,UICollectionViewDelegateFlowLayout,U
 //        getMovieUpGoing()
         
     }
+    
+    
+    
     
     
     // MARK Navigation

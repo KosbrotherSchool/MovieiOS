@@ -17,6 +17,8 @@ class TheaterTimeViewController: UIViewController,UICollectionViewDelegateFlowLa
     var theater_id:Int!
     var theater_name:String!
     var theater_address:String!
+    var is_loved = false
+    var theFavTheater:FavTheater!
     
     @IBAction func searchLocation(sender: UIBarButtonItem) {
         let mapString = self.theater_address
@@ -32,6 +34,25 @@ class TheaterTimeViewController: UIViewController,UICollectionViewDelegateFlowLa
         
     }
     
+    let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    
+    @IBOutlet weak var loveButton: UIBarButtonItem!
+    @IBAction func checkLove(sender: UIBarButtonItem) {
+        
+        switch is_loved{
+        case true:
+            is_loved = false
+            FavTheater.deleteTheFavTheater(moc, theTheater: theFavTheater)
+            loveButton.image = UIImage(named: "love")
+        case false:
+            is_loved = true
+            let theater = Theater.getTheaterByID(theater_id)!
+            theFavTheater = FavTheater.add(moc, name: theater.name!, phone: theater.phone!, address: theater.address!, theater_id: theater_id)!
+            loveButton.image = UIImage(named: "icon_love_white_full")
+        }
+        
+    }
+    
     
     override func viewDidLoad() {
         
@@ -41,6 +62,12 @@ class TheaterTimeViewController: UIViewController,UICollectionViewDelegateFlowLa
         self.title = theater_name
         // Mark get posts from net
         getMovieTimes(theater_id)
+        
+        if let favTheater = FavTheater.queryByTheaterID(moc, theater_id: theater_id){
+            is_loved = true
+            theFavTheater = favTheater
+            loveButton.image = UIImage(named: "icon_love_white_full")
+        }
     }
     
     

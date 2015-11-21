@@ -1006,13 +1006,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="2oi-Oz-drP">
-                                <rect key="frame" x="20" y="72" width="560" height="29"/>
-                                <segments>
-                                    <segment title="區域"/>
-                                    <segment title="時刻快查"/>
-                                </segments>
-                            </segmentedControl>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="o1M-pf-7uS">
                                 <rect key="frame" x="0.0" y="108" width="600" height="443"/>
                                 <color key="backgroundColor" red="0.93665167299999996" green="0.93665167299999996" blue="0.93665167299999996" alpha="1" colorSpace="calibratedRGB"/>
@@ -1024,7 +1017,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AreaCell" id="nFF-ag-cqd" customClass="AreaCell" customModule="MovieTime" customModuleProvider="target">
-                                        <rect key="frame" x="147" y="0.0" width="306" height="203"/>
+                                        <rect key="frame" x="147" y="64" width="306" height="203"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="306" height="203"/>
@@ -1053,14 +1046,51 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="2oi-Oz-drP">
+                                <rect key="frame" x="20" y="72" width="560" height="29"/>
+                                <segments>
+                                    <segment title="區域"/>
+                                    <segment title="時刻快查"/>
+                                </segments>
+                            </segmentedControl>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8JH-YX-f1O">
+                                <rect key="frame" x="0.0" y="108" width="600" height="443"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="選擇時刻與戲院" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="edB-F6-Jma">
+                                        <rect key="frame" x="8" y="8" width="584" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="11:00  台北東區  誠品戲院" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kVG-zp-ic9" customClass="NoCursorTextField" customModule="MovieTime" customModuleProvider="target">
+                                        <rect key="frame" x="8" y="29" width="584" height="30"/>
+                                        <color key="backgroundColor" red="1" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="0.80000000000000004" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="kVG-zp-ic9" firstAttribute="top" secondItem="edB-F6-Jma" secondAttribute="bottom" id="K5x-d0-l0E"/>
+                                    <constraint firstAttribute="trailing" secondItem="edB-F6-Jma" secondAttribute="trailing" constant="8" id="c05-4V-3ea"/>
+                                    <constraint firstAttribute="trailing" secondItem="kVG-zp-ic9" secondAttribute="trailing" constant="8" id="hu5-9l-sDx"/>
+                                    <constraint firstItem="edB-F6-Jma" firstAttribute="top" secondItem="8JH-YX-f1O" secondAttribute="top" constant="8" id="kWp-ne-jPc"/>
+                                    <constraint firstItem="edB-F6-Jma" firstAttribute="leading" secondItem="8JH-YX-f1O" secondAttribute="leading" constant="8" id="t4Z-Dl-nBG"/>
+                                    <constraint firstItem="kVG-zp-ic9" firstAttribute="leading" secondItem="8JH-YX-f1O" secondAttribute="leading" constant="8" id="xao-OX-p43"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="o1M-pf-7uS" firstAttribute="trailing" secondItem="QS5-Rx-YEW" secondAttribute="trailing" id="2Xi-PE-TXA"/>
+                            <constraint firstItem="Djb-ko-YwX" firstAttribute="top" secondItem="8JH-YX-f1O" secondAttribute="bottom" id="63Y-8F-McT"/>
+                            <constraint firstItem="8JH-YX-f1O" firstAttribute="top" secondItem="2oi-Oz-drP" secondAttribute="bottom" constant="8" id="BWj-Zg-E4C"/>
                             <constraint firstItem="o1M-pf-7uS" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leading" id="EAn-Q4-0Ie"/>
                             <constraint firstItem="o1M-pf-7uS" firstAttribute="bottom" secondItem="Djb-ko-YwX" secondAttribute="top" id="Kli-2W-xEi"/>
+                            <constraint firstItem="8JH-YX-f1O" firstAttribute="centerX" secondItem="QS5-Rx-YEW" secondAttribute="centerX" id="Q5e-79-kK8"/>
                             <constraint firstItem="o1M-pf-7uS" firstAttribute="top" secondItem="2oi-Oz-drP" secondAttribute="bottom" constant="8" symbolic="YES" id="ZjJ-8T-hTS"/>
                             <constraint firstItem="2oi-Oz-drP" firstAttribute="centerX" secondItem="o1M-pf-7uS" secondAttribute="centerX" id="elf-lO-Lfy"/>
+                            <constraint firstItem="8JH-YX-f1O" firstAttribute="width" secondItem="QS5-Rx-YEW" secondAttribute="width" id="f4G-Qs-2mL"/>
                             <constraint firstItem="2oi-Oz-drP" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leadingMargin" id="hF5-8O-pFt"/>
                             <constraint firstItem="2oi-Oz-drP" firstAttribute="top" secondItem="L7p-HK-0SC" secondAttribute="bottom" constant="8" symbolic="YES" id="ow2-XK-Rqm"/>
                         </constraints>
@@ -1074,6 +1104,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="o1M-pf-7uS" id="NWi-kq-Cpt"/>
+                        <outlet property="pickerTextField" destination="kVG-zp-ic9" id="dlh-Pa-ROp"/>
                         <outlet property="segmentControl" destination="2oi-Oz-drP" id="r4s-vb-cbR"/>
                     </connections>
                 </viewController>

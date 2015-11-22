@@ -15,14 +15,34 @@ class TheaterViewController: UIViewController,UICollectionViewDelegateFlowLayout
     
     let pickerView = UIPickerView()
     var pickOption1 = ["08:00", "09:00", "10:00", "11:00", "12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00","22:00","23:00","00:00","01:00","02:00","03:00","04:00","05:00","06:00","07:00"]
-    var pickOption2 = ["台北東區", "台北東區", "台北東區", "台北東區", "台北東區", "台北東區", "台北東區"]
+    var pickOption2 = Area.getAreas()
     var pickOption3 = ["國賓影城微風廣場", "國賓影城微風廣場", "國賓影城微風廣場", "國賓影城微風廣場", "國賓影城微風廣場", "國賓影城微風廣場", "國賓影城微風廣場", "國賓影城微風廣場", "國賓影城微風廣場"]
     
     @IBOutlet weak var segmentControl: UISegmentedControl!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var pickerTextField: NoCursorTextField!
+    @IBOutlet weak var quickSearchView: UIView!
+    
+    
+    
+    @IBAction func switchSeg(sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex{
+        case 0:
+            collectionView.hidden = false
+            quickSearchView.hidden = true
+        case 1:
+            collectionView.hidden = true
+            quickSearchView.hidden = false
+        default:
+            break
+        }
+    }
+    
+    
     
     override func viewDidLoad() {
+        quickSearchView.hidden = true
+        
         areas = Area.getAreas()
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -146,7 +166,7 @@ class TheaterViewController: UIViewController,UICollectionViewDelegateFlowLayout
         default:
             break
         }
-        pickerTextField.text = self.pickOption1[pick_row_1]+" "+self.pickOption2[pick_row_2]+" "+self.pickOption3[pick_row_3]
+        pickerTextField.text = self.pickOption1[pick_row_1]+" "+self.pickOption2[pick_row_2].name!+" "+self.pickOption3[pick_row_3]
     }
     
     func donePicker(){
@@ -168,7 +188,7 @@ class TheaterViewController: UIViewController,UICollectionViewDelegateFlowLayout
         case 0:
             pickerLabel.text = pickOption1[row]
         case 1:
-            pickerLabel.text = pickOption2[row]
+            pickerLabel.text = pickOption2[row].name!
         case 2:
             pickerLabel.text = pickOption3[row]
         default:

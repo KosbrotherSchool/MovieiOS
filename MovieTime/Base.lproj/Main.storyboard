@@ -997,7 +997,7 @@
         <!--影院-->
         <scene sceneID="wg7-f3-ORb">
             <objects>
-                <viewController id="8rJ-Kc-sve" customClass="TheaterViewController" customModule="MovieTime" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="8rJ-Kc-sve" customClass="TheaterViewController" customModule="MovieTime" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="L7p-HK-0SC"/>
                         <viewControllerLayoutGuide type="bottom" id="Djb-ko-YwX"/>
@@ -1017,7 +1017,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AreaCell" id="nFF-ag-cqd" customClass="AreaCell" customModule="MovieTime" customModuleProvider="target">
-                                        <rect key="frame" x="147" y="64" width="306" height="203"/>
+                                        <rect key="frame" x="147" y="0.0" width="306" height="203"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="306" height="203"/>
@@ -1052,6 +1052,9 @@
                                     <segment title="區域"/>
                                     <segment title="時刻快查"/>
                                 </segments>
+                                <connections>
+                                    <action selector="switchSeg:" destination="8rJ-Kc-sve" eventType="valueChanged" id="pKP-iL-dMD"/>
+                                </connections>
                             </segmentedControl>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8JH-YX-f1O">
                                 <rect key="frame" x="0.0" y="108" width="600" height="443"/>
@@ -1105,6 +1108,7 @@
                     <connections>
                         <outlet property="collectionView" destination="o1M-pf-7uS" id="NWi-kq-Cpt"/>
                         <outlet property="pickerTextField" destination="kVG-zp-ic9" id="dlh-Pa-ROp"/>
+                        <outlet property="quickSearchView" destination="8JH-YX-f1O" id="Q6s-5e-QIN"/>
                         <outlet property="segmentControl" destination="2oi-Oz-drP" id="r4s-vb-cbR"/>
                     </connections>
                 </viewController>

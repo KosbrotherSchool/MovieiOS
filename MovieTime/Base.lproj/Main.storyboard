@@ -1006,7 +1006,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="o1M-pf-7uS">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="o1M-pf-7uS" customClass="AreaCollectionView" customModule="MovieTime" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="108" width="600" height="443"/>
                                 <color key="backgroundColor" red="0.93665167299999996" green="0.93665167299999996" blue="0.93665167299999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="bcw-g0-MCS">
@@ -1065,8 +1065,78 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="xdi-9o-8Np">
+                                        <rect key="frame" x="8" y="67" width="584" height="368"/>
+                                        <color key="backgroundColor" red="0.93665167299999996" green="0.93665167299999996" blue="0.93665167299999996" alpha="1" colorSpace="calibratedRGB"/>
+                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="tah-KQ-pPC">
+                                            <size key="itemSize" width="489" height="167"/>
+                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        </collectionViewFlowLayout>
+                                        <cells>
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="QuickTimeCell" id="NHc-K5-jXI" customClass="QuickTimeCell" customModule="MovieTime" customModuleProvider="target">
+                                                <rect key="frame" x="48" y="0.0" width="489" height="167"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                                    <rect key="frame" x="0.0" y="0.0" width="489" height="167"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="08:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ol3-S8-dvc">
+                                                            <rect key="frame" x="8" y="8" width="47" height="151"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="戲院名稱" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Shi-Ic-KZ0">
+                                                            <rect key="frame" x="63" y="8" width="379" height="21"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="J9m-v2-ul4">
+                                                            <rect key="frame" x="449" y="8" width="32" height="151"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="32" id="okx-Lq-hen"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="影片名稱" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ww0-dN-8ZW">
+                                                            <rect key="frame" x="63" y="37" width="379" height="123"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                </view>
+                                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstItem="ww0-dN-8ZW" firstAttribute="width" secondItem="Shi-Ic-KZ0" secondAttribute="width" id="08n-Ih-xgh"/>
+                                                    <constraint firstItem="ww0-dN-8ZW" firstAttribute="leading" secondItem="Shi-Ic-KZ0" secondAttribute="leading" id="9Up-F7-6A3"/>
+                                                    <constraint firstAttribute="topMargin" secondItem="Shi-Ic-KZ0" secondAttribute="top" id="EQP-7o-tAk"/>
+                                                    <constraint firstAttribute="topMargin" secondItem="Ol3-S8-dvc" secondAttribute="top" id="Gzk-g4-QBx"/>
+                                                    <constraint firstItem="ww0-dN-8ZW" firstAttribute="trailing" secondItem="Shi-Ic-KZ0" secondAttribute="trailing" id="Pm5-JV-lyb"/>
+                                                    <constraint firstAttribute="trailingMargin" secondItem="J9m-v2-ul4" secondAttribute="trailing" id="buq-4W-sA0"/>
+                                                    <constraint firstAttribute="bottomMargin" secondItem="J9m-v2-ul4" secondAttribute="bottom" id="cK3-J3-fAy"/>
+                                                    <constraint firstAttribute="topMargin" secondItem="J9m-v2-ul4" secondAttribute="top" id="gxY-Bp-dm5"/>
+                                                    <constraint firstItem="ww0-dN-8ZW" firstAttribute="top" secondItem="Shi-Ic-KZ0" secondAttribute="bottom" constant="8" id="ixv-bE-aAA"/>
+                                                    <constraint firstAttribute="bottomMargin" secondItem="ww0-dN-8ZW" secondAttribute="bottom" id="lDd-WJ-U3o"/>
+                                                    <constraint firstItem="J9m-v2-ul4" firstAttribute="leading" secondItem="Shi-Ic-KZ0" secondAttribute="trailing" constant="8" symbolic="YES" id="oZd-xX-dIc"/>
+                                                    <constraint firstAttribute="bottomMargin" secondItem="Ol3-S8-dvc" secondAttribute="bottom" id="sD8-nU-bCE"/>
+                                                    <constraint firstAttribute="leadingMargin" secondItem="Ol3-S8-dvc" secondAttribute="leading" id="txL-Pa-Sq3"/>
+                                                    <constraint firstItem="Shi-Ic-KZ0" firstAttribute="leading" secondItem="Ol3-S8-dvc" secondAttribute="trailing" constant="8" symbolic="YES" id="yDP-o8-8Si"/>
+                                                </constraints>
+                                                <connections>
+                                                    <outlet property="image" destination="J9m-v2-ul4" id="eGu-Cu-HUc"/>
+                                                    <outlet property="movieLabel" destination="ww0-dN-8ZW" id="UgP-kA-F9G"/>
+                                                    <outlet property="theaterLabel" destination="Shi-Ic-KZ0" id="kaG-7w-wyH"/>
+                                                    <outlet property="timeLabel" destination="Ol3-S8-dvc" id="TEr-Lo-fUq"/>
+                                                </connections>
+                                            </collectionViewCell>
+                                        </cells>
+                                    </collectionView>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="11:00  台北東區  誠品戲院" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kVG-zp-ic9" customClass="NoCursorTextField" customModule="MovieTime" customModuleProvider="target">
-                                        <rect key="frame" x="8" y="29" width="584" height="30"/>
+                                        <rect key="frame" x="8" y="28" width="584" height="30"/>
                                         <color key="backgroundColor" red="1" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -1074,10 +1144,14 @@
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="0.80000000000000004" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstItem="xdi-9o-8Np" firstAttribute="leading" secondItem="8JH-YX-f1O" secondAttribute="leading" constant="8" id="C1D-Oi-KLw"/>
+                                    <constraint firstAttribute="bottom" secondItem="xdi-9o-8Np" secondAttribute="bottom" constant="8" id="DYi-ht-EPN"/>
                                     <constraint firstItem="kVG-zp-ic9" firstAttribute="top" secondItem="edB-F6-Jma" secondAttribute="bottom" id="K5x-d0-l0E"/>
                                     <constraint firstAttribute="trailing" secondItem="edB-F6-Jma" secondAttribute="trailing" constant="8" id="c05-4V-3ea"/>
+                                    <constraint firstItem="xdi-9o-8Np" firstAttribute="top" secondItem="kVG-zp-ic9" secondAttribute="bottom" constant="9" id="fd7-8w-BSw"/>
                                     <constraint firstAttribute="trailing" secondItem="kVG-zp-ic9" secondAttribute="trailing" constant="8" id="hu5-9l-sDx"/>
                                     <constraint firstItem="edB-F6-Jma" firstAttribute="top" secondItem="8JH-YX-f1O" secondAttribute="top" constant="8" id="kWp-ne-jPc"/>
+                                    <constraint firstItem="xdi-9o-8Np" firstAttribute="centerX" secondItem="kVG-zp-ic9" secondAttribute="centerX" id="lIN-KW-R0g"/>
                                     <constraint firstItem="edB-F6-Jma" firstAttribute="leading" secondItem="8JH-YX-f1O" secondAttribute="leading" constant="8" id="t4Z-Dl-nBG"/>
                                     <constraint firstItem="kVG-zp-ic9" firstAttribute="leading" secondItem="8JH-YX-f1O" secondAttribute="leading" constant="8" id="xao-OX-p43"/>
                                 </constraints>
@@ -1106,9 +1180,10 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="collectionView" destination="o1M-pf-7uS" id="NWi-kq-Cpt"/>
+                        <outlet property="areaCollectionView" destination="o1M-pf-7uS" id="bAm-aj-AnZ"/>
                         <outlet property="pickerTextField" destination="kVG-zp-ic9" id="dlh-Pa-ROp"/>
                         <outlet property="quickSearchView" destination="8JH-YX-f1O" id="Q6s-5e-QIN"/>
+                        <outlet property="quickTimeCollectionView" destination="xdi-9o-8Np" id="fJd-MM-Utl"/>
                         <outlet property="segmentControl" destination="2oi-Oz-drP" id="r4s-vb-cbR"/>
                     </connections>
                 </viewController>

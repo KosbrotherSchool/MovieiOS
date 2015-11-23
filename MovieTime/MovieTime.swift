@@ -26,4 +26,14 @@ class MovieTime {
         self.movie_photo = movie_photo
     }
     
+    var the_time: String!
+    init(remark: String, movie_title: String, movie_time: String, movie_id: Int, theater_id: Int, movie_photo: String, the_time: String){
+        self.remark = remark
+        self.movie_title = movie_title
+        self.movie_time = movie_time
+        self.movie_id = movie_id
+        self.theater_id = theater_id
+        self.movie_photo = movie_photo
+        self.the_time = the_time
+    }
 }

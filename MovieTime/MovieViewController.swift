@@ -18,7 +18,7 @@ class MovieViewController: UIViewController,UICollectionViewDelegateFlowLayout,U
     let sectionInsets = UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0)
     var rankMovies = [Movie]()
     var thisWeekMovies = [Movie]()
-    var publishingMovies = [Movie]()
+    var secondMovies = [Movie]()
     var upGoingMovies = [Movie]()
     let reuseIdentifier = "collCell"
     
@@ -26,47 +26,8 @@ class MovieViewController: UIViewController,UICollectionViewDelegateFlowLayout,U
     @IBOutlet weak var collectionView: UICollectionView!
     
     @IBAction func segmentChange(sender: UISegmentedControl) {
-        switch segmentControl.selectedSegmentIndex
-        {
-            case 0:
-                if(rankMovies.count==0){
-                    getMovieTaipeiRanks()
-                }else{
-                    dispatch_async(dispatch_get_main_queue()) {
-                        self.collectionView.reloadData()
-                    }
-                }
-                break;
-            case 1:
-                if(thisWeekMovies.count==0){
-                    getMovieThisWeek()
-                }else{
-                    dispatch_async(dispatch_get_main_queue()) {
-                        self.collectionView.reloadData()
-                    }
-                }
-                break;
-            case 2:
-                if(publishingMovies.count==0){
-                    getMoviePublishing()
-                }else{
-                    dispatch_async(dispatch_get_main_queue()) {
-                        self.collectionView.reloadData()
-                    }
-                }
-                break;
-            case 3:
-                if(upGoingMovies.count == 0){
-                    getMovieUpGoing()
-                }else{
-                    dispatch_async(dispatch_get_main_queue()) {
-                        self.collectionView.reloadData()
-                    }
-                }
-                break;
-            default:
-                break;
-        }
+        self.collectionView.reloadData()
+        self.collectionView.scrollToItemAtIndexPath(NSIndexPath.init(forItem: 0, inSection: 0), atScrollPosition: UICollectionViewScrollPosition.Top, animated: true)
     }
     
     
@@ -77,9 +38,9 @@ class MovieViewController: UIViewController,UICollectionViewDelegateFlowLayout,U
         collectionView.delegate = self
         collectionView.dataSource = self
         getMovieTaipeiRanks()
-//        getMovieThisWeek()
-//        getMoviePublishing()
-//        getMovieUpGoing()
+        getMovieThisWeek()
+        getSecondMovies()
+        getMovieUpGoing()
         
     }
     
@@ -91,16 +52,27 @@ class MovieViewController: UIViewController,UICollectionViewDelegateFlowLayout,U
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "ShowDetail" {
             let movieDetailViewController = segue.destinationViewController as! MovieDetailViewController
-            
-            // Get the cell that generated this segue.
             if let selectedMealCell = sender as? MovieCollectionCell {
                 let indexPath = collectionView.indexPathForCell(selectedMealCell)!
-                let selectedMovie = rankMovies[indexPath.row]
-                movieDetailViewController.theMovie = selectedMovie
+                
+                switch segmentControl.selectedSegmentIndex{
+                case 0:
+                    let selectedMovie = rankMovies[indexPath.row]
+                    movieDetailViewController.theMovie = selectedMovie
+                case 1:
+                    let selectedMovie = thisWeekMovies[indexPath.row]
+                    movieDetailViewController.theMovie = selectedMovie
+                case 2:
+                    let selectedMovie = secondMovies[indexPath.row]
+                    movieDetailViewController.theMovie = selectedMovie
+                case 3:
+                    let selectedMovie = upGoingMovies[indexPath.row]
+                    movieDetailViewController.theMovie = selectedMovie
+                default:
+                    let selectedMovie = rankMovies[indexPath.row]
+                    movieDetailViewController.theMovie = selectedMovie
+                }
             }
-        }
-        else if segue.identifier == "AddItem" {
-            print("Adding new meal.")
         }
     }
 
@@ -146,7 +118,7 @@ class MovieViewController: UIViewController,UICollectionViewDelegateFlowLayout,U
         case 1:
             return thisWeekMovies.count
         case 2:
-            return publishingMovies.count
+            return secondMovies.count
         case 3:
             return upGoingMovies.count
         default:
@@ -170,7 +142,7 @@ class MovieViewController: UIViewController,UICollectionViewDelegateFlowLayout,U
             theMovie = self.thisWeekMovies[indexPath.row]
             break;
         case 2:
-            theMovie = self.publishingMovies[indexPath.row]
+            theMovie = self.secondMovies[indexPath.row]
             break;
         case 3:
             theMovie = self.upGoingMovies[indexPath.row]
@@ -196,7 +168,7 @@ class MovieViewController: UIViewController,UICollectionViewDelegateFlowLayout,U
     
     func getMovieTaipeiRanks()
     {
-        let url = NSURL(string: host + "/api2/movie/rank_movies?page=1")
+        let url = NSURL(string: host + "/api2/movie/pub_movies")
         let config = NSURLSessionConfiguration.defaultSessionConfiguration()
         let session = NSURLSession(configuration: config)
         let req = NSURLRequest(URL: url!)
@@ -224,7 +196,9 @@ class MovieViewController: UIViewController,UICollectionViewDelegateFlowLayout,U
             dispatch_async(dispatch_get_global_queue(priority, 0)) {
                 
                 dispatch_async(dispatch_get_main_queue()) {
-                    self.collectionView.reloadData()
+                    if self.segmentControl.selectedSegmentIndex == 0{
+                        self.collectionView.reloadData()
+                    }
                 }
                 
             }
@@ -263,7 +237,9 @@ class MovieViewController: UIViewController,UICollectionViewDelegateFlowLayout,U
             dispatch_async(dispatch_get_global_queue(priority, 0)) {
                 
                 dispatch_async(dispatch_get_main_queue()) {
-                    self.collectionView.reloadData()
+                    if self.segmentControl.selectedSegmentIndex == 1{
+                        self.collectionView.reloadData()
+                    }
                 }
                 
             }
@@ -273,9 +249,9 @@ class MovieViewController: UIViewController,UICollectionViewDelegateFlowLayout,U
         print(NSDate())
     }
     
-    func getMoviePublishing()
+    func getSecondMovies()
     {
-        let url = NSURL(string: host + "/api2/movie/movies?movie_round=1&page=1")
+        let url = NSURL(string: host + "/api2/movie/second_movies")
         let config = NSURLSessionConfiguration.defaultSessionConfiguration()
         let session = NSURLSession(configuration: config)
         let req = NSURLRequest(URL: url!)
@@ -293,7 +269,7 @@ class MovieViewController: UIViewController,UICollectionViewDelegateFlowLayout,U
                 let point = movie["point"].doubleValue
                 let review_size = movie["review_size"].int
                 let newMovie = Movie.init(movie_id: id!, title: title, small_pic: small_pic, large_pic: large_pic, points: point, review_size: review_size!)
-                self.publishingMovies.append(newMovie)
+                self.secondMovies.append(newMovie)
                 print(title)
                 
             }
@@ -302,7 +278,9 @@ class MovieViewController: UIViewController,UICollectionViewDelegateFlowLayout,U
             dispatch_async(dispatch_get_global_queue(priority, 0)) {
                 
                 dispatch_async(dispatch_get_main_queue()) {
-                    self.collectionView.reloadData()
+                    if self.segmentControl.selectedSegmentIndex == 2{
+                        self.collectionView.reloadData()
+                    }
                 }
                 
             }
@@ -314,7 +292,7 @@ class MovieViewController: UIViewController,UICollectionViewDelegateFlowLayout,U
     
     func getMovieUpGoing()
     {
-        let url = NSURL(string: host + "/api2/movie/movies?movie_round=3&page=1")
+        let url = NSURL(string: host + "/api2/movie/up_going_movies")
         let config = NSURLSessionConfiguration.defaultSessionConfiguration()
         let session = NSURLSession(configuration: config)
         let req = NSURLRequest(URL: url!)
@@ -342,7 +320,9 @@ class MovieViewController: UIViewController,UICollectionViewDelegateFlowLayout,U
             dispatch_async(dispatch_get_global_queue(priority, 0)) {
                 
                 dispatch_async(dispatch_get_main_queue()) {
-                    self.collectionView.reloadData()
+                    if self.segmentControl.selectedSegmentIndex == 3{
+                        self.collectionView.reloadData()
+                    }
                 }
                 
             }

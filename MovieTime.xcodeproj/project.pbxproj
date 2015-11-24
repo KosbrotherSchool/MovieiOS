@@ -49,6 +49,12 @@
 		A697ADBF1C0080C5003A4CFF /* NoCursorTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A697ADBE1C0080C5003A4CFF /* NoCursorTextField.swift */; };
 		A697ADC11C01FB6A003A4CFF /* AreaCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A697ADC01C01FB6A003A4CFF /* AreaCollectionView.swift */; };
 		A697ADC31C02010D003A4CFF /* QuickTimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A697ADC21C02010D003A4CFF /* QuickTimeCell.swift */; };
+		A697ADC51C02B833003A4CFF /* MovieFavCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A697ADC41C02B833003A4CFF /* MovieFavCell.swift */; };
+		A697ADC71C02BB66003A4CFF /* FavMovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A697ADC61C02BB66003A4CFF /* FavMovieViewController.swift */; };
+		A697ADD21C02BF5D003A4CFF /* FavMovie+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A697ADD01C02BF5D003A4CFF /* FavMovie+CoreDataProperties.swift */; };
+		A697ADD31C02BF5D003A4CFF /* FavMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = A697ADD11C02BF5D003A4CFF /* FavMovie.swift */; };
+		A697AE041C032EEC003A4CFF /* MovieSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A697AE031C032EEC003A4CFF /* MovieSearchCell.swift */; };
+		A697AE061C0347B7003A4CFF /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A697AE051C0347B7003A4CFF /* SearchViewController.swift */; };
 		A69C19EE1BE9F1D400E95C71 /* TheaterTimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69C19ED1BE9F1D400E95C71 /* TheaterTimeCell.swift */; };
 		A69C19F11BEA02D900E95C71 /* TimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69C19F01BEA02D900E95C71 /* TimeCell.swift */; };
 		A69C19FF1BEA210600E95C71 /* Theater.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69C19FE1BEA210600E95C71 /* Theater.swift */; };
@@ -126,6 +132,12 @@
 		A697ADBE1C0080C5003A4CFF /* NoCursorTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoCursorTextField.swift; sourceTree = "<group>"; };
 		A697ADC01C01FB6A003A4CFF /* AreaCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AreaCollectionView.swift; sourceTree = "<group>"; };
 		A697ADC21C02010D003A4CFF /* QuickTimeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickTimeCell.swift; sourceTree = "<group>"; };
+		A697ADC41C02B833003A4CFF /* MovieFavCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieFavCell.swift; sourceTree = "<group>"; };
+		A697ADC61C02BB66003A4CFF /* FavMovieViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavMovieViewController.swift; sourceTree = "<group>"; };
+		A697ADD01C02BF5D003A4CFF /* FavMovie+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FavMovie+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		A697ADD11C02BF5D003A4CFF /* FavMovie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavMovie.swift; sourceTree = "<group>"; };
+		A697AE031C032EEC003A4CFF /* MovieSearchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieSearchCell.swift; sourceTree = "<group>"; };
+		A697AE051C0347B7003A4CFF /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		A69C19ED1BE9F1D400E95C71 /* TheaterTimeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TheaterTimeCell.swift; sourceTree = "<group>"; };
 		A69C19F01BEA02D900E95C71 /* TimeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeCell.swift; sourceTree = "<group>"; };
 		A69C19FE1BEA210600E95C71 /* Theater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theater.swift; sourceTree = "<group>"; };
@@ -215,6 +227,8 @@
 				A697AD8B1BFE0D1D003A4CFF /* FavTheaterViewController.swift */,
 				A697ADBE1C0080C5003A4CFF /* NoCursorTextField.swift */,
 				A6C26AF31C016D5D0028C0B4 /* HallaViewController.swift */,
+				A697ADC61C02BB66003A4CFF /* FavMovieViewController.swift */,
+				A697AE051C0347B7003A4CFF /* SearchViewController.swift */,
 			);
 			path = MovieTime;
 			sourceTree = "<group>";
@@ -275,6 +289,8 @@
 				A697AD831BFE04A1003A4CFF /* Model.xcdatamodeld */,
 				A697AD861BFE0575003A4CFF /* FavTheater+CoreDataProperties.swift */,
 				A697AD871BFE0575003A4CFF /* FavTheater.swift */,
+				A697ADD01C02BF5D003A4CFF /* FavMovie+CoreDataProperties.swift */,
+				A697ADD11C02BF5D003A4CFF /* FavMovie.swift */,
 			);
 			name = CoreData;
 			sourceTree = "<group>";
@@ -307,6 +323,8 @@
 				A6C26AF51C016D930028C0B4 /* BoardCell.swift */,
 				A6C26AF71C016DB10028C0B4 /* PromoteCell.swift */,
 				A697ADC21C02010D003A4CFF /* QuickTimeCell.swift */,
+				A697ADC41C02B833003A4CFF /* MovieFavCell.swift */,
+				A697AE031C032EEC003A4CFF /* MovieSearchCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -492,6 +510,7 @@
 				A69C1A011BEA225600E95C71 /* Area.swift in Sources */,
 				A69C19F11BEA02D900E95C71 /* TimeCell.swift in Sources */,
 				A6887FC21BE25BF700C87E78 /* MovieCollectionCell.swift in Sources */,
+				A697AE061C0347B7003A4CFF /* SearchViewController.swift in Sources */,
 				A66B3B1D1BF5CBE500B39508 /* BlogPostCell.swift in Sources */,
 				A697AC211BF1EE6F003A4CFF /* TrailerViewController.swift in Sources */,
 				A697AC2F1BF34BAE003A4CFF /* PhotoCell.swift in Sources */,
@@ -517,7 +536,9 @@
 				A697AC3A1BF41F44003A4CFF /* Review.swift in Sources */,
 				A60D72221BE0F2030006CCD7 /* MovieViewController.swift in Sources */,
 				A697AC3E1BF58AF3003A4CFF /* AreaCell.swift in Sources */,
+				A697ADD21C02BF5D003A4CFF /* FavMovie+CoreDataProperties.swift in Sources */,
 				A697AC291BF2F4C7003A4CFF /* WebViewController.swift in Sources */,
+				A697ADD31C02BF5D003A4CFF /* FavMovie.swift in Sources */,
 				A69C1A031BEA22F500E95C71 /* MovieTime.swift in Sources */,
 				A66B3B151BF582D000B39508 /* BlogPost.swift in Sources */,
 				A697AD891BFE0575003A4CFF /* FavTheater.swift in Sources */,
@@ -526,11 +547,14 @@
 				A697AC381BF41EBC003A4CFF /* ReviewViewController.swift in Sources */,
 				A697AC401BF58B4E003A4CFF /* TheaterViewController.swift in Sources */,
 				A69C19EE1BE9F1D400E95C71 /* TheaterTimeCell.swift in Sources */,
+				A697ADC71C02BB66003A4CFF /* FavMovieViewController.swift in Sources */,
 				A697AC2D1BF3331A003A4CFF /* PhotoViewController.swift in Sources */,
 				A697AC481BF879B5003A4CFF /* TheaterTimeViewController.swift in Sources */,
 				A66B3B231BF6CE4000B39508 /* BloggerViewController.swift in Sources */,
 				A66B3B1B1BF58DB700B39508 /* MovieRank.swift in Sources */,
 				A697ADC31C02010D003A4CFF /* QuickTimeCell.swift in Sources */,
+				A697ADC51C02B833003A4CFF /* MovieFavCell.swift in Sources */,
+				A697AE041C032EEC003A4CFF /* MovieSearchCell.swift in Sources */,
 				A6C26AF41C016D5D0028C0B4 /* HallaViewController.swift in Sources */,
 				A66B3B131BF5814E00B39508 /* Blogger.swift in Sources */,
 				A697AC441BF86EF1003A4CFF /* AreaTheaterViewController.swift in Sources */,

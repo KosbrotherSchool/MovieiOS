@@ -103,6 +103,26 @@ class MovieDetailViewController: UIViewController, UINavigationControllerDelegat
     var movieAreas = [Area]()
     var movieTheaterTimes = [MovieTime]()
     
+    let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    var is_loved = false
+    var theFavMovie:FavMovie!
+    @IBOutlet weak var loveButton: UIBarButtonItem!
+    @IBAction func checkLove(sender: UIBarButtonItem) {
+        
+        switch is_loved{
+        case true:
+            is_loved = false
+            FavMovie.deleteTheFavTheater(moc, theMovie: theFavMovie)
+            loveButton.image = UIImage(named: "love")
+        case false:
+            is_loved = true
+            theFavMovie = FavMovie.add(moc, title: theMovie!.title, pic_link: theMovie!.large_pic, point: theMovie!.points, movie_id: theMovie!.movie_id)
+            loveButton.image = UIImage(named: "icon_love_white_full")
+        }
+        
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = theMovie!.title
@@ -124,6 +144,12 @@ class MovieDetailViewController: UIViewController, UINavigationControllerDelegat
         
         indicator.startAnimating()
         indicator.hidesWhenStopped = true
+        
+        if let favMovie = FavMovie.queryByMovieID(moc, movie_id: theMovie!.movie_id){
+            is_loved = true
+            theFavMovie = favMovie
+            loveButton.image = UIImage(named: "icon_love_white_full")
+        }
     }
     
     // MARK Navigation
@@ -208,19 +234,21 @@ class MovieDetailViewController: UIViewController, UINavigationControllerDelegat
     func setScrollAreas(){
         // MARK setup location scroll
         locationScrollView.scrollEnabled = true;
-        var scroll_length: Int = 0
-        for index in 0...movieAreas.count-1 {
-            let button = UIButton(type: UIButtonType.System) as UIButton
-            let button_length = (movieAreas[index].name?.characters.count)! * 25
-            button.frame = CGRectMake( CGFloat (scroll_length + 10 ), 10, CGFloat(button_length), 30)
-            scroll_length = scroll_length + button_length + 10
-            button.backgroundColor = UIColor.greenColor()
-            button.setTitle(movieAreas[index].name, forState: UIControlState.Normal)
-            button.tag = index
-            button.addTarget(self, action: "swichAreaAction:", forControlEvents: UIControlEvents.TouchUpInside)
-            locationScrollView.addSubview(button)
+        if(movieAreas.count > 0){
+            var scroll_length: Int = 0
+            for index in 0...movieAreas.count-1 {
+                let button = UIButton(type: UIButtonType.System) as UIButton
+                let button_length = (movieAreas[index].name?.characters.count)! * 25
+                button.frame = CGRectMake( CGFloat (scroll_length + 10 ), 10, CGFloat(button_length), 30)
+                scroll_length = scroll_length + button_length + 10
+                button.backgroundColor = UIColor.greenColor()
+                button.setTitle(movieAreas[index].name, forState: UIControlState.Normal)
+                button.tag = index
+                button.addTarget(self, action: "swichAreaAction:", forControlEvents: UIControlEvents.TouchUpInside)
+                locationScrollView.addSubview(button)
+            }
+            locationScrollView.contentSize = CGSizeMake(CGFloat(scroll_length + 10), 50);
         }
-        locationScrollView.contentSize = CGSizeMake(CGFloat(scroll_length + 10), 50);
     }
     
     func swichAreaAction(button:UIButton!)
@@ -380,8 +408,12 @@ class MovieDetailViewController: UIViewController, UINavigationControllerDelegat
                 
                 dispatch_async(dispatch_get_main_queue()) {
                     // set areas here
-                    self.setScrollAreas()
-                    self.getAreaMovieTimes(movie_id, area_id: (self.movieAreas.first?.area_id)! )
+                    if self.movieAreas.count > 0{
+                        self.setScrollAreas()
+                        self.getAreaMovieTimes(movie_id, area_id: (self.movieAreas.first?.area_id)! )
+                    }else{
+                        // show no publishing theater
+                    }
                 }
                 
             }

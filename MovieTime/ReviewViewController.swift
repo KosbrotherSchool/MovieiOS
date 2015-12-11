@@ -8,23 +8,46 @@
 
 import UIKit
 import SwiftyJSON
+import JLToast
 
-class ReviewViewController: UIViewController,UICollectionViewDelegateFlowLayout,UICollectionViewDataSource {
+class ReviewViewController: UIViewController,UICollectionViewDelegateFlowLayout,UICollectionViewDataSource,MyProtocol {
     
     var movie_id: Int!
     var reviews = [Review]()
     @IBOutlet weak var collectionView: UICollectionView!
+    var mPage = 1
+    var is_refresh = false
     
     override func viewDidLoad() {
         
         collectionView.delegate = self
         collectionView.dataSource = self
         
-        print(movie_id)
-        // MARK get reviews by id
-        getMovieReviews(movie_id)
+        getMovieReviews(movie_id, page: 1)
+        
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        let wrieteReviewViewController = segue.destinationViewController as! WriteReviewViewController
+        wrieteReviewViewController.mDelegate = self
+        wrieteReviewViewController.movie_id = self.movie_id
+            
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        if (is_refresh){
+            reviews.removeAll()
+            collectionView.reloadData()
+            mPage = 1
+            getMovieReviews(movie_id, page: 1)
+            is_refresh = false
+        }
+    }
+    
+    func sendIsRefreshToPreviousVC(is_refresh:Bool){
+        self.is_refresh = true
+    }
     
     // MARK spacing of collectionview
     // spacing between rows
@@ -97,11 +120,29 @@ class ReviewViewController: UIViewController,UICollectionViewDelegateFlowLayout,
         return cell
     }
     
+    func collectionView(collectionView: UICollectionView,willDisplayCell cell: UICollectionViewCell,forItemAtIndexPath indexPath: NSIndexPath){
+        
+            if self.reviews.count >= 20 && indexPath.row == self.reviews.count-10 {
+                if mPage != -1{
+                    print("load more \(mPage)")
+                    mPage = mPage + 1
+                    getMovieReviews(movie_id, page: mPage)
+                }
+            }
+        
+    }
+    
     let host = "http://139.162.10.76"
     
-    func getMovieReviews(movie_id: Int)
+    func getMovieReviews(movie_id: Int, page: Int)
     {
-        let url = NSURL(string: host + "/api/movie/reviews?movie_id="+String(movie_id)+"&page="+String(1))
+        if !Reachability.isConnectedToNetwork(){
+            JLToast.makeText("沒有網路連線", duration: JLToastDelay.ShortDelay).show()
+            return
+        }
+        
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+        let url = NSURL(string: host + "/api2/movie/reviews?movie_id="+String(movie_id)+"&page="+String(page))
         let config = NSURLSessionConfiguration.defaultSessionConfiguration()
         let session = NSURLSession(configuration: config)
         let req = NSURLRequest(URL: url!)
@@ -113,26 +154,33 @@ class ReviewViewController: UIViewController,UICollectionViewDelegateFlowLayout,
             // handle data
             print(NSDate())
             let jsonData = JSON(data: data!)
-            for review in jsonData.arrayValue{
-                let review_id = review["id"].int
-                let author = review["author"].stringValue
-                let title = review["title"].stringValue
-                let content = review["content"].stringValue
-                let publish_date = review["publish_date"].stringValue
-                let point = review["point"].doubleValue
-                let head_index = review["head_index"].int
-                
-                let newReview = Review.init(review_id: review_id!, author: author, title: title, content: content, publish_date: publish_date, point: point, head_index: head_index!)
-                self.reviews.append(newReview)
+            if jsonData.count < 20{
+                self.mPage = -1 //no need load more
             }
             
-            // update UI
-            let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
-            dispatch_async(dispatch_get_global_queue(priority, 0)) {
-                dispatch_async(dispatch_get_main_queue()) {
-                    self.collectionView.reloadData()
+            if jsonData.count > 0{
+                for review in jsonData.arrayValue{
+                    let review_id = review["id"].int
+                    let author = review["author"].stringValue
+                    let title = review["title"].stringValue
+                    let content = review["content"].stringValue
+                    let publish_date = review["publish_date"].stringValue
+                    let point = review["point"].doubleValue
+                    let head_index = review["head_index"].int
+                
+                    let newReview = Review.init(review_id: review_id!, author: author, title: title, content: content, publish_date: publish_date, point: point, head_index: head_index!)
+                    self.reviews.append(newReview)
+                }
+            
+                // update UI
+                let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+                dispatch_async(dispatch_get_global_queue(priority, 0)) {
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.collectionView.reloadData()
+                    }
                 }
             }
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
             
         })
         task.resume()

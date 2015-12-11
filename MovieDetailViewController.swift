@@ -10,9 +10,9 @@ import UIKit
 import SwiftyJSON
 import Cosmos
 import Kingfisher
+import JLToast
 
 extension String {
-    
     var html2AttributedString: NSAttributedString? {
         guard
             let data = dataUsingEncoding(NSUTF8StringEncoding)
@@ -31,14 +31,13 @@ extension String {
 
 class MovieDetailViewController: UIViewController, UINavigationControllerDelegate,UICollectionViewDelegateFlowLayout,UICollectionViewDataSource{
     
+    @IBOutlet weak var areaCollectionView: UICollectionView!
     
+    @IBOutlet weak var theaterTimeCollectionView: MovieTimeCollectionView!
     @IBOutlet weak var timeView: UIView!
     @IBOutlet weak var segmentControl: UISegmentedControl!
     @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var theaterTimeCollection: UICollectionView!
-    @IBOutlet weak var locationScrollView: UIScrollView!
     @IBOutlet weak var indicator: UIActivityIndicatorView!
-    
     
     @IBOutlet weak var movieImage: UIImageView!
     @IBOutlet weak var movieClassLabel: UILabel!
@@ -81,27 +80,33 @@ class MovieDetailViewController: UIViewController, UINavigationControllerDelegat
     
     
     @IBAction func changeSegment(sender: UISegmentedControl) {
-        
-        switch segmentControl.selectedSegmentIndex
-        {
-        case 0:
-            scrollView.hidden = false
-            timeView.hidden = true
-            break;
-        case 1:
-            scrollView.hidden = true
-            timeView.hidden = false
-            break;
-        default:
-            break;
-        }
-        
-        
+        self.resetViewBySegmentControl()
     }
     
-    var theMovie: Movie?
+    func resetViewBySegmentControl(){
+        if Reachability.isConnectedToNetwork(){
+            switch segmentControl.selectedSegmentIndex
+            {
+            case 0:
+                scrollView.hidden = false
+                timeView.hidden = true
+                break;
+            case 1:
+                scrollView.hidden = true
+                timeView.hidden = false
+                break;
+            default:
+                break;
+            }
+        }else{
+            JLToast.makeText("沒有網路連線", duration: JLToastDelay.ShortDelay).show()
+        }
+    }
+    
+    var theMovie: Movie!
     var movieAreas = [Area]()
     var movieTheaterTimes = [MovieTime]()
+    var selected_area_id = 0
     
     let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     var is_loved = false
@@ -125,12 +130,15 @@ class MovieDetailViewController: UIViewController, UINavigationControllerDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = theMovie!.title
+        navigationItem.title = theMovie.title
         timeView.hidden = true
         scrollView.hidden = true
         
-        theaterTimeCollection.delegate = self
-        theaterTimeCollection.dataSource = self
+        theaterTimeCollectionView.delegate = theaterTimeCollectionView.self
+        theaterTimeCollectionView.dataSource = theaterTimeCollectionView.self
+        
+        areaCollectionView.delegate = self
+        areaCollectionView.dataSource = self
         
         // MARK get movie area and theaters and movie time
         getMovieAreasByMovieID((theMovie?.movie_id)!)
@@ -150,7 +158,32 @@ class MovieDetailViewController: UIViewController, UINavigationControllerDelegat
             theFavMovie = favMovie
             loveButton.image = UIImage(named: "icon_love_white_full")
         }
+        
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: Selector("swipedRight:"))
+        swipeRight.direction = .Right
+        self.timeView.addGestureRecognizer(swipeRight)
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: Selector("swipedLeft:"))
+        swipeLeft.direction = .Left
+        self.scrollView.addGestureRecognizer(swipeLeft)
+        
     }
+    
+    func swipedRight(sender:UIGestureRecognizer){
+        let currentIndex = segmentControl.selectedSegmentIndex
+        if currentIndex > 0{
+            segmentControl.selectedSegmentIndex = currentIndex - 1
+        }
+        self.resetViewBySegmentControl()
+    }
+    
+    func swipedLeft(sender:UIGestureRecognizer){
+        let currentIndex = segmentControl.selectedSegmentIndex
+        if currentIndex < 1{
+            segmentControl.selectedSegmentIndex = currentIndex + 1
+        }
+        self.resetViewBySegmentControl()
+    }
+
     
     // MARK Navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -170,100 +203,19 @@ class MovieDetailViewController: UIViewController, UINavigationControllerDelegat
     }
     
     
-    // MARK spacing of collectionview
-    // spacing between rows
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
-        return 10.0
-    }
-    // spacing between items
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
-        return 10.0
-    }
     
-    func collectionView(collectionView: UICollectionView,
-        layout collectionViewLayout: UICollectionViewLayout,
-        sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-            
-            let cell_width = collectionView.frame.size.width-20
-            
-            let num_for_one_rows: Int = Int((collectionView.frame.size.width - 46)/90) // count
-            let movie_time = movieTheaterTimes[indexPath.row].movie_time!
-            let time_array = movie_time.componentsSeparatedByString(",")
-            var cell_height = 0
-            if( time_array.count % num_for_one_rows ) > 0{
-                cell_height = Int( time_array.count / num_for_one_rows + 1) * 40 + 10 + 45
-            }else{
-                cell_height = Int( time_array.count / num_for_one_rows) * 40 + 10 + 45
-
-            }
-            
-            return CGSize(width: cell_width, height: CGFloat(cell_height))
-            
-    }
-    
-    func collectionView(collectionView: UICollectionView,
-        layout collectionViewLayout: UICollectionViewLayout,
-        insetForSectionAtIndex section: Int) -> UIEdgeInsets {
-            return UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
-    }
-    
-    // Mark Collection Data
-    
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return movieTheaterTimes.count
-    }
-    
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("theaterCell", forIndexPath: indexPath) as! TheaterTimeCell
-        cell.title.text = Theater.getTheaterByID(movieTheaterTimes[indexPath.row].theater_id!)?.name
-        cell.times = movieTheaterTimes[indexPath.row].movie_time!.componentsSeparatedByString(",")
-        cell.timeCollection.delegate = cell
-        cell.timeCollection.dataSource = cell
-        cell.timeCollection.reloadData()
-        
-        return cell
-    }
-    
-    
-    // MARK Set Scroll Areas
-    func setScrollAreas(){
-        // MARK setup location scroll
-        locationScrollView.scrollEnabled = true;
-        if(movieAreas.count > 0){
-            var scroll_length: Int = 0
-            for index in 0...movieAreas.count-1 {
-                let button = UIButton(type: UIButtonType.System) as UIButton
-                let button_length = (movieAreas[index].name?.characters.count)! * 25
-                button.frame = CGRectMake( CGFloat (scroll_length + 10 ), 10, CGFloat(button_length), 30)
-                scroll_length = scroll_length + button_length + 10
-                button.backgroundColor = UIColor.greenColor()
-                button.setTitle(movieAreas[index].name, forState: UIControlState.Normal)
-                button.tag = index
-                button.addTarget(self, action: "swichAreaAction:", forControlEvents: UIControlEvents.TouchUpInside)
-                locationScrollView.addSubview(button)
-            }
-            locationScrollView.contentSize = CGSizeMake(CGFloat(scroll_length + 10), 50);
-        }
-    }
-    
-    func swichAreaAction(button:UIButton!)
-    {
-        let index = button.tag
-        movieTheaterTimes.removeAll()
-        getAreaMovieTimes(134, area_id: movieAreas[index].area_id!)
-    }
     
     // MARK MovieAPI
     let host = "http://139.162.10.76"
     
     func getMovieInfo(movie_id: Int)
     {
-        let url = NSURL(string: host + "/api/movie/movies?movie_id=" + String(movie_id) ) //小王子
+        if !Reachability.isConnectedToNetwork(){
+            JLToast.makeText("沒有網路連線", duration: JLToastDelay.ShortDelay).show()
+            return
+        }
+        
+        let url = NSURL(string: host + "/api/movie/movies?movie_id=" + String(movie_id) )
         let config = NSURLSessionConfiguration.defaultSessionConfiguration()
         let session = NSURLSession(configuration: config)
         let req = NSURLRequest(URL: url!)
@@ -316,6 +268,7 @@ class MovieDetailViewController: UIViewController, UINavigationControllerDelegat
                     self.moviePointLabel.text = String(self.theMovie!.points) + "分"
                     self.movieRatting.rating = self.theMovie!.points / 2
                     self.movieRatting.settings.updateOnTouch = false
+                    self.movieRatting.settings.fillMode = .Half
                     
                     self.infoLabel.text = self.theMovie!.movie_info?.html2String
                     
@@ -368,6 +321,70 @@ class MovieDetailViewController: UIViewController, UINavigationControllerDelegat
     
     }
     
+    // MARK spacing of collectionview
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
+        return 8.0
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
+        return 8.0
+    }
+    
+    func collectionView(collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+            
+            return CGSize(width: 80, height: 34)
+            
+    }
+    
+    func collectionView(collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+            return UIEdgeInsets(top: 8.0, left: 8.0, bottom: 8.0, right: 8.0)
+    }
+    
+    
+    // Mark Collection Data
+    
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return movieAreas.count
+    }
+    
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("TimeAreaCell", forIndexPath: indexPath) as! TimeAreaCell
+        let area = movieAreas[indexPath.row]
+        cell.label.text = area.name
+        return cell
+    }
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath){
+        for cell in collectionView.visibleCells(){
+            cell.backgroundColor = UIColor.whiteColor()
+        }
+        let cell = collectionView.cellForItemAtIndexPath(indexPath)! as! TimeAreaCell
+        cell.backgroundColor = UIColor(red:1.00, green:0.60, blue:0.00, alpha:1.0)
+        selected_area_id = movieAreas[indexPath.row].area_id!
+        
+        self.movieTheaterTimes.removeAll()
+        self.theaterTimeCollectionView.setMovieTheaterTimes(self.movieTheaterTimes)
+        getAreaMovieTimes(theMovie.movie_id, area_id: selected_area_id)
+    }
+    
+    func collectionView(collectionView: UICollectionView,willDisplayCell cell: UICollectionViewCell,forItemAtIndexPath indexPath: NSIndexPath){
+        if(selected_area_id == movieAreas[indexPath.row].area_id!){
+            cell.backgroundColor = UIColor(red:1.00, green:0.60, blue:0.00, alpha:1.0)
+        }else{
+            cell.backgroundColor = UIColor.whiteColor()
+        }
+    }
+    
     func heightForLabel(text:String, font:UIFont, width:CGFloat) -> CGFloat
     {
         let label:UILabel = UILabel(frame: CGRectMake(0, 0, width, CGFloat.max))
@@ -383,6 +400,12 @@ class MovieDetailViewController: UIViewController, UINavigationControllerDelegat
     
     func getMovieAreasByMovieID(movie_id: Int)
     {
+        if !Reachability.isConnectedToNetwork(){
+            JLToast.makeText("沒有網路連線", duration: JLToastDelay.ShortDelay).show()
+            return
+        }
+        
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         let url = NSURL(string: host + "/api/movie/areas?movie_id=" + String(movie_id) ) //小王子
         let config = NSURLSessionConfiguration.defaultSessionConfiguration()
         let session = NSURLSession(configuration: config)
@@ -409,7 +432,8 @@ class MovieDetailViewController: UIViewController, UINavigationControllerDelegat
                 dispatch_async(dispatch_get_main_queue()) {
                     // set areas here
                     if self.movieAreas.count > 0{
-                        self.setScrollAreas()
+                        self.selected_area_id = self.movieAreas[0].area_id!
+                        self.areaCollectionView.reloadData()
                         self.getAreaMovieTimes(movie_id, area_id: (self.movieAreas.first?.area_id)! )
                     }else{
                         // show no publishing theater
@@ -417,7 +441,7 @@ class MovieDetailViewController: UIViewController, UINavigationControllerDelegat
                 }
                 
             }
-            
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
         })
         task.resume()
         print(NSDate())
@@ -425,6 +449,12 @@ class MovieDetailViewController: UIViewController, UINavigationControllerDelegat
     
     func getAreaMovieTimes(movie_id: Int, area_id: Int)
     {
+        if !Reachability.isConnectedToNetwork(){
+            JLToast.makeText("沒有網路連線", duration: JLToastDelay.ShortDelay).show()
+            return
+        }
+        
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         let url = NSURL(string: host + "/api/movie/movietimes?movie="+String(movie_id)+"&area="+String(area_id) ) //小王子
         let config = NSURLSessionConfiguration.defaultSessionConfiguration()
         let session = NSURLSession(configuration: config)
@@ -463,10 +493,11 @@ class MovieDetailViewController: UIViewController, UINavigationControllerDelegat
                 
                 dispatch_async(dispatch_get_main_queue()) {
                     // set areas here
-                    self.theaterTimeCollection.reloadData()
+                    self.theaterTimeCollectionView.setMovieTheaterTimes(self.movieTheaterTimes)
                 }
                 
             }
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
             
         })
         task.resume()

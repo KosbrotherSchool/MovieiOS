@@ -9,6 +9,7 @@
 import UIKit
 import Kingfisher
 import SwiftyJSON
+import JLToast
 
 class BloggerViewController: UIViewController,UICollectionViewDelegateFlowLayout,UICollectionViewDataSource {
 
@@ -93,6 +94,11 @@ class BloggerViewController: UIViewController,UICollectionViewDelegateFlowLayout
     
     func getBloggers()
     {
+        if !Reachability.isConnectedToNetwork(){
+            JLToast.makeText("沒有網路連線", duration: JLToastDelay.ShortDelay).show()
+            return
+        }
+        
         let url = NSURL(string: host + "/api/movie/blogs")
         let config = NSURLSessionConfiguration.defaultSessionConfiguration()
         let session = NSURLSession(configuration: config)

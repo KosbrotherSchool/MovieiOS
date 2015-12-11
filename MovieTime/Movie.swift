@@ -35,13 +35,14 @@ class Movie {
     var potato_link: String?
     //    var publish_date_date;
     
-    init(movie_id: Int, title: String, small_pic: String, large_pic: String, points: Double, review_size: Int){
+    init(movie_id: Int, title: String, small_pic: String, large_pic: String, points: Double, review_size: Int, publish_date: String){
         self.movie_id = movie_id
         self.title = title
         self.small_pic = small_pic
         self.large_pic = large_pic
         self.points = points
         self.review_size = review_size
+        self.publish_date = publish_date
     }
     
     init(movie_id: Int, title: String, title_eng: String, movie_class: String, movie_type: String, movie_length: String, publish_date: String, director: String, editors: String, actors: String, official: String, movie_info: String, small_pic: String, large_pic: String, movie_round: Int, photo_size: Int, trailer_size: Int, points: Double, review_size: Int, imdb_point: String, imdb_link: String, potato_point: String, potato_link: String){

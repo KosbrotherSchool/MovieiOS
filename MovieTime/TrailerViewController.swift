@@ -9,6 +9,7 @@
 import UIKit
 import Kingfisher
 import SwiftyJSON
+import JLToast
 
 class TrailerViewController: UIViewController,UICollectionViewDelegateFlowLayout,UICollectionViewDataSource {
     
@@ -90,6 +91,11 @@ class TrailerViewController: UIViewController,UICollectionViewDelegateFlowLayout
     
     func getMovieTrailer(movie_id: Int)
     {
+        if !Reachability.isConnectedToNetwork(){
+            JLToast.makeText("沒有網路連線", duration: JLToastDelay.ShortDelay).show()
+            return
+        }
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         let url = NSURL(string: host + "/api/movie/trailers?movie_id="+String(movie_id))
         let config = NSURLSessionConfiguration.defaultSessionConfiguration()
         let session = NSURLSession(configuration: config)
@@ -122,7 +128,7 @@ class TrailerViewController: UIViewController,UICollectionViewDelegateFlowLayout
                 }
                 
             }
-            
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
         })
         task.resume()
         print(NSDate())

@@ -25,6 +25,7 @@
                                     <segment title="影評"/>
                                     <segment title="新聞"/>
                                 </segments>
+                                <color key="tintColor" red="1" green="0.59999999999999998" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <action selector="segmentChange:" destination="xJD-uB-h99" eventType="valueChanged" id="5wR-nO-mE5"/>
                                 </connections>
@@ -257,6 +258,6 @@
         <image name="blog" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="gMI-rw-RvZ"/>
+        <segue reference="H2Q-IU-cCK"/>
     </inferredMetricsTieBreakers>
 </document>

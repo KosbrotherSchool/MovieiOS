@@ -25,7 +25,7 @@ class FavTheaterViewController: UIViewController,UICollectionViewDelegateFlowLay
     }
     
     override func viewWillAppear(animated: Bool) {
-        favTheaters = FavTheater.getAll(moc)
+        favTheaters = FavTheater.getAll(moc).reverse()
         collectionView.reloadData()
     }
     

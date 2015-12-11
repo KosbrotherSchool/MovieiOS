@@ -13,7 +13,6 @@ class TheaterTimeCell: UICollectionViewCell,UICollectionViewDelegateFlowLayout,U
     var times = [String]()
     
     @IBOutlet weak var title: UILabel!
-    @IBOutlet weak var positionButton: UIButton!
     @IBOutlet weak var timeCollection: UICollectionView!
     
     

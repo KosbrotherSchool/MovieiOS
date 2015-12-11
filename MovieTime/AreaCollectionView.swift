@@ -10,23 +10,23 @@ import UIKit
 
 class AreaCollectionView: UICollectionView,UICollectionViewDelegateFlowLayout,UICollectionViewDataSource {
     
-    let sectionInsets = UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0)
+    let sectionInsets = UIEdgeInsets(top: 8.0, left: 8.0, bottom: 8.0, right: 8.0)
     var areas =  Area.getAreas()
     
     // MARK spacing of collectionview
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
-        return 5.0
+        return 8.0
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
-        return 5.0
+        return 8.0
     }
     
     func collectionView(collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
             
-            let cell_width = (collectionView.frame.size.width-20)/3
+            let cell_width = (collectionView.frame.size.width-32)/3
             let cell_height = cell_width
             return CGSize(width: cell_width, height: cell_height)
             

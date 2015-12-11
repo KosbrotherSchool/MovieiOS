@@ -9,6 +9,7 @@
 import UIKit
 import Kingfisher
 import SwiftyJSON
+import JLToast
 
 class BlogViewController: UIViewController,UICollectionViewDelegateFlowLayout,UICollectionViewDataSource {
     
@@ -16,27 +17,14 @@ class BlogViewController: UIViewController,UICollectionViewDelegateFlowLayout,UI
     @IBOutlet weak var collectionView: UICollectionView!
     
     @IBAction func segmentChange(sender: UISegmentedControl) {
-        
-        switch self.segmentControl.selectedSegmentIndex
-        {
-        case 0:
-            if blogPosts.count == 0{
-                getBlogPosts(1)
-            }else{
-                self.collectionView.reloadData()
-                self.collectionView.scrollToItemAtIndexPath(NSIndexPath.init(forItem: 0, inSection: 0), atScrollPosition: UICollectionViewScrollPosition.Top, animated: true)
-            }
-        case 1:
-            if newses.count == 0{
-                getNewses(1)
-            }else{
-                self.collectionView.reloadData()
-                self.collectionView.scrollToItemAtIndexPath(NSIndexPath.init(forItem: 0, inSection: 0), atScrollPosition: UICollectionViewScrollPosition.Top, animated: true)
-            }
-        default:
-            break;
+        self.resetCollectionView()
+    }
+    
+    func resetCollectionView(){
+        if blogPosts.count > 0 && newses.count > 0{
+            self.collectionView.reloadData()
+            self.collectionView.scrollToItemAtIndexPath(NSIndexPath.init(forItem: 0, inSection: 0), atScrollPosition: UICollectionViewScrollPosition.Top, animated: true)
         }
-        
     }
     
     var blogPosts = [BlogPost]()
@@ -55,15 +43,54 @@ class BlogViewController: UIViewController,UICollectionViewDelegateFlowLayout,UI
         self.refreshControl = UIRefreshControl()
         self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
         collectionView.addSubview(refreshControl)
-        // Mark get posts from net
-        getBlogPosts(1)
+        
+        
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: Selector("swipedRight:"))
+        swipeRight.direction = .Right
+        self.collectionView.addGestureRecognizer(swipeRight)
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: Selector("swipedLeft:"))
+        swipeLeft.direction = .Left
+        self.collectionView.addGestureRecognizer(swipeLeft)
+    }
+    
+    func swipedRight(sender:UIGestureRecognizer){
+        let currentIndex = segmentControl.selectedSegmentIndex
+        if currentIndex > 0{
+            segmentControl.selectedSegmentIndex = currentIndex - 1
+        }
+        self.resetCollectionView()
+    }
+    
+    func swipedLeft(sender:UIGestureRecognizer){
+        let currentIndex = segmentControl.selectedSegmentIndex
+        if currentIndex < 1{
+            segmentControl.selectedSegmentIndex = currentIndex + 1
+        }
+        self.resetCollectionView()
+
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        if Reachability.isConnectedToNetwork(){
+            if Settings.isBlogPostNeedRefreshByThisDate() || blogPosts.count == 0{
+                blogPosts.removeAll()
+                newses.removeAll()
+                collectionView.reloadData()
+                blogCurrentPage = 1
+                newsCurrentPage = 1
+                getBlogPosts(1)
+                getNewses(1)
+                Settings.saveBlogPostUpdateDate()
+            }
+        }else{
+            JLToast.makeText("沒有網路連線", duration: JLToastDelay.ShortDelay).show()
+        }
     }
     
     func refresh(sender:AnyObject)
     {
         self.refreshControl.endRefreshing()
     }
-    
     
     // MARK Navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -133,25 +160,29 @@ class BlogViewController: UIViewController,UICollectionViewDelegateFlowLayout,UI
     
     func collectionView(collectionView: UICollectionView,willDisplayCell cell: UICollectionViewCell,forItemAtIndexPath indexPath: NSIndexPath){
         
-        switch segmentControl.selectedSegmentIndex{
-            case 0:
-                if indexPath.row == self.blogPosts.count-1 {
-                    if !isBlogLoadingMore{
-                        print("load more blogs")
-                        blogCurrentPage++
-                        getBlogPosts(blogCurrentPage)
+        if Reachability.isConnectedToNetwork(){
+            switch segmentControl.selectedSegmentIndex{
+                case 0:
+                    if indexPath.row == self.blogPosts.count-10 {
+                        if !isBlogLoadingMore{
+                            print("load more blogs")
+                            blogCurrentPage++
+                            getBlogPosts(blogCurrentPage)
+                        }
                     }
-                }
-            case 1:
-                if indexPath.row == self.newses.count-1{
-                    if !isNewsLoadingMore{
-                        print("load more news")
-                        newsCurrentPage++
-                        getNewses(newsCurrentPage)
+                case 1:
+                    if indexPath.row == self.newses.count-10{
+                        if !isNewsLoadingMore{
+                            print("load more news")
+                            newsCurrentPage++
+                            getNewses(newsCurrentPage)
+                        }
                     }
-                }
-            default:
-                break
+                default:
+                    break
+            }
+        }else{
+            JLToast.makeText("沒有網路連線", duration: JLToastDelay.ShortDelay).show()
         }
         
     }
@@ -188,7 +219,7 @@ class BlogViewController: UIViewController,UICollectionViewDelegateFlowLayout,UI
     func getBlogPosts(page: Int)
     {
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
-        let url = NSURL(string: host + "/api/movie/blog_posts?page="+String(page))
+        let url = NSURL(string: host + "/api2/movie/blog_posts?page="+String(page))
         let config = NSURLSessionConfiguration.defaultSessionConfiguration()
         let session = NSURLSession(configuration: config)
         let req = NSURLRequest(URL: url!)
@@ -197,6 +228,7 @@ class BlogViewController: UIViewController,UICollectionViewDelegateFlowLayout,UI
         let task = session.dataTaskWithRequest(req, completionHandler: {
             (data, resp, err) in
             
+            print(NSDate())
             // Do Something after got data
             let jsonData = JSON(data: data!)
             
@@ -231,8 +263,9 @@ class BlogViewController: UIViewController,UICollectionViewDelegateFlowLayout,UI
     
     func getNewses(page: Int)
     {
+        
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
-        let url = NSURL(string: host + "/api/movie/news?news_type=1&page="+String(page))
+        let url = NSURL(string: host + "/api2/movie/news?news_type=1&page="+String(page))
         let config = NSURLSessionConfiguration.defaultSessionConfiguration()
         let session = NSURLSession(configuration: config)
         let req = NSURLRequest(URL: url!)
@@ -241,6 +274,7 @@ class BlogViewController: UIViewController,UICollectionViewDelegateFlowLayout,UI
         let task = session.dataTaskWithRequest(req, completionHandler: {
             (data, resp, err) in
             
+            print(NSDate())
             // Do Something after got data
             let jsonData = JSON(data: data!)
             
@@ -266,10 +300,6 @@ class BlogViewController: UIViewController,UICollectionViewDelegateFlowLayout,UI
                 dispatch_async(dispatch_get_main_queue()) {
                     UIApplication.sharedApplication().networkActivityIndicatorVisible = false
                     self.collectionView.reloadData()
-                    if self.newsCurrentPage == 1{
-                        self.collectionView.scrollToItemAtIndexPath(NSIndexPath.init(forItem: 0, inSection: 0), atScrollPosition: UICollectionViewScrollPosition.Top, animated: true)
-                    }
-                    
                 }
                 
             }

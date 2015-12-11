@@ -10,7 +10,7 @@ import UIKit
 
 class BoardCollectionView: UICollectionView, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
 
-    var array = ["電影版","劇版","有好康","公告區","關於我們","投票區"]
+    var array = ["公告區","電影版","信用卡資訊","劇版","關於我們","生活版","最近按讚"]
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
@@ -23,16 +23,39 @@ class BoardCollectionView: UICollectionView, UICollectionViewDelegateFlowLayout,
     
     // what look for every cell
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("BoardCell", forIndexPath: indexPath) as! BoardCell
-        print(indexPath.row)
-        cell.label.text = array[indexPath.row]
-        print("image\(indexPath.row+1)")
-        cell.image.image = UIImage(named: "image\(indexPath.row+1)")
-        cell.layer.cornerRadius = 5
-        cell.layer.borderWidth = 2.0
-        let red = UIColor(red: 230.0/255.0, green: 100.0/255.0, blue: 100.0/255.0, alpha: 1.0)
-        cell.layer.borderColor = red.CGColor
-        return cell
+        switch indexPath.row{
+        case 2:
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("BoardCell3", forIndexPath: indexPath)as! BoardCell3
+            cell.label.text = array[indexPath.row]
+            print("image\(indexPath.row+1)")
+            cell.image.image = UIImage(named: "image\(indexPath.row+1)")
+            cell.layer.cornerRadius = 5
+            cell.layer.borderWidth = 2.0
+            let yellow = UIColor(red:1.00, green:0.60, blue:0.00, alpha:1.0)
+            cell.layer.borderColor = yellow.CGColor
+            return cell
+        case 4:
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("BoardCell2", forIndexPath: indexPath)as! BoardCell2
+            cell.label.text = array[indexPath.row]
+            print("image\(indexPath.row+1)")
+            cell.image.image = UIImage(named: "image\(indexPath.row+1)")
+            cell.layer.cornerRadius = 5
+            cell.layer.borderWidth = 2.0
+            let yellow = UIColor(red:1.00, green:0.60, blue:0.00, alpha:1.0)
+            cell.layer.borderColor = yellow.CGColor
+            return cell
+        default:
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("BoardCell", forIndexPath: indexPath) as! BoardCell
+            print(indexPath.row)
+            cell.label.text = array[indexPath.row]
+            print("image\(indexPath.row+1)")
+            cell.image.image = UIImage(named: "image\(indexPath.row+1)")
+            cell.layer.cornerRadius = 5
+            cell.layer.borderWidth = 2.0
+            let yellow = UIColor(red:1.00, green:0.60, blue:0.00, alpha:1.0)
+            cell.layer.borderColor = yellow.CGColor
+            return cell
+        }
     }
     
     // MARK delegate

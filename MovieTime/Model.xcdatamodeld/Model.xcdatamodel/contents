@@ -1,10 +1,33 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9057" systemVersion="14F27" minimumToolsVersion="Xcode 7.0">
+    <entity name="FavMessage" representedClassName=".FavMessage" syncable="YES">
+        <attribute name="author" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="head_index" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="is_head" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="like_count" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="link_url" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="message_id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="pub_date" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="reply_size" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="tag" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="view_count" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+    </entity>
     <entity name="FavMovie" representedClassName=".FavMovie" syncable="YES">
         <attribute name="movie_id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="pic_link" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="point" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="FavReply" representedClassName=".FavReply" syncable="YES">
+        <attribute name="author" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="head_index" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="like_count" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="message_id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="pub_date" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="reply_id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
     </entity>
     <entity name="FavTheater" representedClassName=".FavTheater" syncable="YES">
         <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
@@ -13,7 +36,9 @@
         <attribute name="theater_id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
     </entity>
     <elements>
-        <element name="FavTheater" positionX="-45" positionY="0" width="128" height="105"/>
         <element name="FavMovie" positionX="-18" positionY="54" width="128" height="105"/>
+        <element name="FavTheater" positionX="-45" positionY="0" width="128" height="105"/>
+        <element name="FavMessage" positionX="-27" positionY="54" width="128" height="225"/>
+        <element name="FavReply" positionX="-18" positionY="126" width="128" height="150"/>
     </elements>
 </model>

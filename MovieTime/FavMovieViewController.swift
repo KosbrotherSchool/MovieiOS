@@ -22,7 +22,7 @@ class FavMovieViewController: UIViewController,UICollectionViewDelegateFlowLayou
     }
     
     override func viewWillAppear(animated: Bool) {
-        self.favMovies = FavMovie.getAll(moc)
+        self.favMovies = FavMovie.getAll(moc).reverse()
         collectionView.reloadData()
     }
     
@@ -35,7 +35,7 @@ class FavMovieViewController: UIViewController,UICollectionViewDelegateFlowLayou
             if let selectedMealCell = sender as? MovieFavCell {
                 let indexPath = collectionView.indexPathForCell(selectedMealCell)!
                 let selectedMovie = favMovies[indexPath.row]
-                let movie = Movie.init(movie_id: Int(selectedMovie.movie_id!), title: selectedMovie.title!, small_pic: "", large_pic: selectedMovie.pic_link!, points: Double(selectedMovie.point!), review_size: 0)
+                let movie = Movie.init(movie_id: Int(selectedMovie.movie_id!), title: selectedMovie.title!, small_pic: "", large_pic: selectedMovie.pic_link!, points: Double(selectedMovie.point!), review_size: 0, publish_date:"")
                 movieDetailViewController.theMovie = movie
             }
         }

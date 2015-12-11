@@ -9,6 +9,7 @@
 import UIKit
 import Kingfisher
 import SwiftyJSON
+import JLToast
 
 class TheaterTimeViewController: UIViewController,UICollectionViewDelegateFlowLayout,UICollectionViewDataSource{
     
@@ -153,6 +154,11 @@ class TheaterTimeViewController: UIViewController,UICollectionViewDelegateFlowLa
     
     func getMovieTimes(theater_id: Int)
     {
+        if !Reachability.isConnectedToNetwork(){
+            JLToast.makeText("沒有網路連線", duration: JLToastDelay.ShortDelay).show()
+            return
+        }
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         let url = NSURL(string: host + "/api/movie/movietimes?theater="+String(theater_id))
         let config = NSURLSessionConfiguration.defaultSessionConfiguration()
         let session = NSURLSession(configuration: config)
@@ -188,7 +194,7 @@ class TheaterTimeViewController: UIViewController,UICollectionViewDelegateFlowLa
                 }
                 
             }
-            
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
         })
         
         task.resume()

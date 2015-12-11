@@ -9,6 +9,7 @@
 import UIKit
 import SwiftyJSON
 import Kingfisher
+import JLToast
 
 class PhotoViewController: UIViewController,UICollectionViewDelegateFlowLayout,UICollectionViewDataSource {
     
@@ -84,6 +85,11 @@ class PhotoViewController: UIViewController,UICollectionViewDelegateFlowLayout,U
     
     func getMovieTrailer(movie_id: Int)
     {
+        if !Reachability.isConnectedToNetwork(){
+            JLToast.makeText("沒有網路連線", duration: JLToastDelay.ShortDelay).show()
+            return
+        }
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         let url = NSURL(string: host + "/api/movie/photos?movie_id="+String(movie_id))
         let config = NSURLSessionConfiguration.defaultSessionConfiguration()
         let session = NSURLSession(configuration: config)
@@ -108,7 +114,7 @@ class PhotoViewController: UIViewController,UICollectionViewDelegateFlowLayout,U
                 }
                 
             }
-            
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
         })
         task.resume()
         print(NSDate())

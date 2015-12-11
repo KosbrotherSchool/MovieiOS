@@ -9,28 +9,39 @@
 import UIKit
 
 class Message{
-
+    
+    var board_id:Int!
     var message_id:Int!
-    var message_author:String!
-    var message_title:String!
-    var message_tag:String!
-    var message_content:String!
-    var message_pub_date:String!
-    var message_view_count:Int!
+    var author:String!
+    var title:String!
+    var tag:String!
+    var content:String!
+    var pub_date:String!
+    var view_count:Int!
+    var like_count:Int!
+    var reply_size:Int!
+    var head_index:Int!
+    var is_head:Bool!
+    var link_url:String!
+    var pic_url:String!
     
-    init(message_id:Int,message_author:String,message_title:String,message_tag:String,message_content:String,message_pub_date:String,message_view_count:Int){
+    init(board_id:Int, message_id:Int,author:String,title:String,tag:String,content:String,pub_date:String,view_count:Int, like_count:Int, reply_size:Int, head_index:Int, is_head:Bool, link_url:String, pic_url:String){
         
+        self.board_id = board_id
         self.message_id = message_id
-        self.message_author = message_author
-        self.message_title = message_title
-        self.message_tag = message_tag
-        self.message_content = message_content
-        self.message_pub_date = message_pub_date
-        self.message_view_count = message_view_count
-    
-    
-    
-    
+        self.author = author
+        self.title = title
+        self.tag = tag
+        self.content = content
+        self.pub_date = pub_date
+        self.view_count = view_count
+        self.like_count = like_count
+        self.reply_size = reply_size
+        self.head_index = head_index
+        self.is_head = is_head
+        self.link_url = link_url
+        self.pic_url = pic_url
+        
     }
     
 

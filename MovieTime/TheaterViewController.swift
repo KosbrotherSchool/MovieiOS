@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftyJSON
+import JLToast
 
 class TheaterViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate,UICollectionViewDelegateFlowLayout,UICollectionViewDataSource {
     
@@ -32,7 +33,11 @@ class TheaterViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     
     
     @IBAction func switchSeg(sender: UISegmentedControl) {
-        switch sender.selectedSegmentIndex{
+        self.resetViewBySegmentControl()
+    }
+    
+    func resetViewBySegmentControl(){
+        switch segmentControl.selectedSegmentIndex{
         case 0:
             areaCollectionView.hidden = false
             quickSearchView.hidden = true
@@ -44,7 +49,6 @@ class TheaterViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         }
     }
     
-    
     override func viewDidLoad() {
         quickSearchView.hidden = true
         
@@ -54,17 +58,15 @@ class TheaterViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         quickTimeCollectionView.delegate = self
         quickTimeCollectionView.dataSource = self
         
-        
-        
         let toolBar = UIToolbar()
         toolBar.barStyle = UIBarStyle.Default
         toolBar.translucent = true
-        toolBar.tintColor = UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1) // button color
+        toolBar.tintColor = UIColor(red:1.00, green:0.60, blue:0.00, alpha:1.0)
         toolBar.sizeToFit()
         
-        let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: "donePicker")
+        let doneButton = UIBarButtonItem(title: "確定", style: UIBarButtonItemStyle.Plain, target: self, action: "donePicker")
         let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
-        let cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: "cancelPicker")
+        let cancelButton = UIBarButtonItem(title: "取消", style: UIBarButtonItemStyle.Plain, target: self, action: "cancelPicker")
         
         toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
         toolBar.userInteractionEnabled = true
@@ -115,6 +117,29 @@ class TheaterViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         }
         self.getMovieTimesByTime(timeString, area_id: area_id, theater_id: theater_id)
         
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: Selector("swipedRight:"))
+        swipeRight.direction = .Right
+        self.quickTimeCollectionView.addGestureRecognizer(swipeRight)
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: Selector("swipedLeft:"))
+        swipeLeft.direction = .Left
+        self.areaCollectionView.addGestureRecognizer(swipeLeft)
+        
+    }
+    
+    func swipedRight(sender:UIGestureRecognizer){
+        let currentIndex = segmentControl.selectedSegmentIndex
+        if currentIndex > 0{
+            segmentControl.selectedSegmentIndex = currentIndex - 1
+        }
+        self.resetViewBySegmentControl()
+    }
+    
+    func swipedLeft(sender:UIGestureRecognizer){
+        let currentIndex = segmentControl.selectedSegmentIndex
+        if currentIndex < 1{
+            segmentControl.selectedSegmentIndex = currentIndex + 1
+        }
+        self.resetViewBySegmentControl()
     }
     
     // MARK Navigation
@@ -127,6 +152,18 @@ class TheaterViewController: UIViewController, UIPickerViewDataSource, UIPickerV
                 areaTheaterViewController.area_id = selectedArea.area_id!
             }
             
+        }
+        
+        if segue.identifier == "QuickTimeMovieSegue"{
+            
+            let movieDetailViewController = segue.destinationViewController as! MovieDetailViewController
+            if let selectedTimeCell = sender as? QuickTimeCell {
+                let indexPath = quickTimeCollectionView.indexPathForCell(selectedTimeCell)!
+                let movieTime = movieTimes[indexPath.row]
+                let movie = Movie.init(movie_id: movieTime.movie_id!, title: movieTime.movie_title!, small_pic: "", large_pic: "", points: 0.0, review_size: 0, publish_date: "")
+                movieDetailViewController.theMovie = movie
+            }
+        
         }
     }
     
@@ -144,7 +181,7 @@ class TheaterViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
             
-            let cell_width = collectionView.frame.size.width
+            let cell_width = collectionView.frame.size.width-16
             return CGSize(width: cell_width, height: 60)
             
     }
@@ -152,7 +189,7 @@ class TheaterViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     func collectionView(collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
         insetForSectionAtIndex section: Int) -> UIEdgeInsets {
-            return UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
+            return UIEdgeInsets(top: 8.0, left: 8.0, bottom: 8.0, right: 8.0)
     }
     
     
@@ -175,8 +212,6 @@ class TheaterViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         cell.theaterLabel.text = Theater.getTheaterByID(movieTime.theater_id!)?.name!
         cell.movieLabel.text = movieTime.movie_title!
         cell.timeLabel.text = movieTime.the_time
-        
-        cell.image.image = self.tint(UIImage(named: "icon_map_white")!, color: UIColor.blackColor())
         
         return cell
     }
@@ -234,6 +269,8 @@ class TheaterViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         print("Done Picker")
         pickerTextField.endEditing(true)
         // Mark get movie times
+        movieTimes.removeAll()
+        quickTimeCollectionView.reloadData()
         
         let index2 = self.pickOption1[self.pick_row_1].startIndex.advancedBy(2)
         let timeString = self.pickOption1[self.pick_row_1].substringToIndex(index2)
@@ -289,6 +326,12 @@ class TheaterViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     // query_hour is like "08" or "12"
     func getMovieTimesByTime(query_hour: String,area_id: Int, theater_id: Int)
     {
+        if !Reachability.isConnectedToNetwork(){
+            JLToast.makeText("沒有網路連線", duration: JLToastDelay.ShortDelay).show()
+            return
+        }
+        
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         self.movieTimes.removeAll()
         
         var url:NSURL!
@@ -341,7 +384,7 @@ class TheaterViewController: UIViewController, UIPickerViewDataSource, UIPickerV
                 }
                 
             }
-            
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
         })
         
         task.resume()

@@ -21,6 +21,7 @@ class ReviewCell: UICollectionViewCell {
     
     func cancelRating(){
         ratingBar.settings.updateOnTouch = false
+        ratingBar.settings.fillMode = .Half
     }
     
     func updateRating(rating: Double) {

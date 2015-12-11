@@ -13,6 +13,6 @@ class QuickTimeCell: UICollectionViewCell {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var theaterLabel: UILabel!
     @IBOutlet weak var movieLabel: UILabel!
-    @IBOutlet weak var image: UIImageView!
+
         
 }

@@ -20,11 +20,11 @@ class TheaterCell: UICollectionViewCell,UICollectionViewDelegateFlowLayout,UICol
     // MARK spacing of collectionview
     // spacing between rows
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
-        return 10.0
+        return 8.0
     }
     // spacing between items
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
-        return 10.0
+        return 8.0
     }
     
     func collectionView(collectionView: UICollectionView,
@@ -41,7 +41,7 @@ class TheaterCell: UICollectionViewCell,UICollectionViewDelegateFlowLayout,UICol
     func collectionView(collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
         insetForSectionAtIndex section: Int) -> UIEdgeInsets {
-            return UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
+            return UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
     }
     
     // Mark Collection Data

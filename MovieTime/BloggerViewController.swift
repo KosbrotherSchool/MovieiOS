@@ -85,7 +85,8 @@ class BloggerViewController: UIViewController,UICollectionViewDelegateFlowLayout
         let blogger = self.bloggers[indexPath.row]
         cell.label.text = blogger.blogger_name
         let picURL = NSURL(string: blogger.pic_link )!
-        cell.imageView.kf_setImageWithURL(picURL)
+        let icon_image = UIImage(named: "app_icon")
+        cell.imageView.kf_setImageWithURL(picURL, placeholderImage: icon_image)
         
         return cell
     }

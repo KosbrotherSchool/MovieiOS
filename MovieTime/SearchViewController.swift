@@ -61,7 +61,8 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         cell.typeLabel.text = movie.movie_type!
         cell.classLabel.text = movie.movie_class!
         cell.pubDateLabel.text = movie.publish_date!
-        cell.movieImageView.kf_setImageWithURL(NSURL(string: movie.small_pic)!)
+        let icon_image = UIImage(named: "app_icon")
+        cell.movieImageView.kf_setImageWithURL(NSURL(string: movie.small_pic)!,placeholderImage: icon_image)
         
         return cell
     }

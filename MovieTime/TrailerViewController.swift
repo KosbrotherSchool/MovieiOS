@@ -82,7 +82,8 @@ class TrailerViewController: UIViewController,UICollectionViewDelegateFlowLayout
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("trailerCell", forIndexPath: indexPath) as! TrailerCell
-        cell.imageView.kf_setImageWithURL(NSURL(string: self.trailers[indexPath.row].getPicLink())!)
+        let icon_image = UIImage(named: "app_icon")
+        cell.imageView.kf_setImageWithURL(NSURL(string: self.trailers[indexPath.row].getPicLink())!,placeholderImage: icon_image)
         cell.titleLabel.text = self.trailers[indexPath.row].title
         return cell
     }

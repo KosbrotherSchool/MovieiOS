@@ -72,7 +72,8 @@ class PhotoViewController: UIViewController,UICollectionViewDelegateFlowLayout,U
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("photoCell", forIndexPath: indexPath) as! PhotoCell
-        cell.imageView.kf_setImageWithURL(NSURL(string: photos[indexPath.row] )!)
+        let icon_image = UIImage(named: "app_icon")
+        cell.imageView.kf_setImageWithURL(NSURL(string: photos[indexPath.row] )!,placeholderImage: icon_image)
         return cell
     }
     

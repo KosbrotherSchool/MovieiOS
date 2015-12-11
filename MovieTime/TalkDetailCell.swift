@@ -66,9 +66,10 @@ class TalkDetailCell: UICollectionViewCell,WKNavigationDelegate{
             /* Now instantiate the web view */
             webView = WKWebView(frame:  CGRectMake(8, progress.frame.origin.y+2, cell_width-16, 200), configuration: configuration)
             webView.addObserver(self, forKeyPath: "estimatedProgress", options: .New, context: nil)
-            let url = NSURL(string: url)
-            let urlRequest = NSURLRequest(URL: url!)
-            webView.loadRequest(urlRequest)
+            
+            let nsUrl = NSURL(string: url.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)! )
+            let request = NSURLRequest(URL:nsUrl!)
+            webView.loadRequest(request)
             webView.navigationDelegate = self
             
             self.addSubview(webView)

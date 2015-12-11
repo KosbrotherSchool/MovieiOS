@@ -84,7 +84,8 @@ class FavMovieViewController: UIViewController,UICollectionViewDelegateFlowLayou
         
         let theMovie = self.favMovies[indexPath.row]
         cell.title.text = theMovie.title
-        cell.image.kf_setImageWithURL(NSURL(string: theMovie.pic_link! )!)
+        let icon_image = UIImage(named: "app_icon")
+        cell.image.kf_setImageWithURL(NSURL(string: theMovie.pic_link! )!, placeholderImage: icon_image)
         cell.cancelRating()
         cell.update(Double(theMovie.point!)/2.0)
         cell.point.text = String(format:"%.1f", Double(theMovie.point!)) + "分"

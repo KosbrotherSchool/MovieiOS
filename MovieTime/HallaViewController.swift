@@ -104,12 +104,14 @@ class HallaViewController: UIViewController, UICollectionViewDelegateFlowLayout,
         case -1:
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("PromoteCell2", forIndexPath: indexPath) as! PromoteCell2
             cell.label.text = highlightMessages[indexPath.row].title
-            cell.image.kf_setImageWithURL(NSURL(string: highlightMessages[indexPath.row].pic_url )!)
+            let icon_image = UIImage(named: "app_icon")
+            cell.image.kf_setImageWithURL(NSURL(string: highlightMessages[indexPath.row].pic_url )!, placeholderImage: icon_image)
             return cell
         default:
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("PromoteCell", forIndexPath: indexPath) as! PromoteCell
             cell.label.text = highlightMessages[indexPath.row].title
-            cell.image.kf_setImageWithURL(NSURL(string: highlightMessages[indexPath.row].pic_url )!)
+            let icon_image = UIImage(named: "app_icon")
+            cell.image.kf_setImageWithURL(NSURL(string: highlightMessages[indexPath.row].pic_url )!, placeholderImage: icon_image)
             return cell
         }
         

@@ -200,13 +200,15 @@ class BlogViewController: UIViewController,UICollectionViewDelegateFlowLayout,UI
             cell.publishDate.text = blogPost.blogPost_pub_date
             
             let picURL = NSURL(string: blogPost.blogPost_pic_link )!
-            cell.postImage.kf_setImageWithURL(picURL)
+            let icon_image = UIImage(named: "app_icon")
+            cell.postImage.kf_setImageWithURL(picURL, placeholderImage: icon_image)
         case 1:
             let news = self.newses[indexPath.row]
             cell.postTitle.text = news.movienews_title
             cell.publishDate.text = news.movienews_publish_day
             let picURL = NSURL(string: news.movienews_pic_link )!
-            cell.postImage.kf_setImageWithURL(picURL)
+            let icon_image = UIImage(named: "app_icon")
+            cell.postImage.kf_setImageWithURL(picURL, placeholderImage: icon_image)
         default:
             break
         }

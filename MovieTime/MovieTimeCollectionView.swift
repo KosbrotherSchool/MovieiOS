@@ -67,7 +67,12 @@ class MovieTimeCollectionView: UICollectionView,UICollectionViewDelegateFlowLayo
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("theaterCell", forIndexPath: indexPath) as! TheaterTimeCell
-        cell.title.text = (Theater.getTheaterByID(movieTheaterTimes[indexPath.row].theater_id!)?.name)! + " "+movieTheaterTimes[indexPath.row].remark!
+        if let theater = Theater.getTheaterByID(movieTheaterTimes[indexPath.row].theater_id!){
+            cell.title.text = theater.name! + " "+movieTheaterTimes[indexPath.row].remark!
+        }else{
+            cell.title.text = "此戲院為新增戲院,更新App即可看到"
+        }
+        
         cell.times = movieTheaterTimes[indexPath.row].movie_time!.componentsSeparatedByString(",")
         cell.timeCollection.delegate = cell
         cell.timeCollection.dataSource = cell

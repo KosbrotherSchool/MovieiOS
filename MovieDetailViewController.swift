@@ -259,7 +259,8 @@ class MovieDetailViewController: UIViewController, UINavigationControllerDelegat
 
                 dispatch_async(dispatch_get_main_queue()) {
                     // set movie info here
-                    self.movieImage.kf_setImageWithURL(NSURL(string: self.theMovie!.large_pic )!)
+                    let icon_image = UIImage(named: "app_icon")
+                    self.movieImage.kf_setImageWithURL(NSURL(string: self.theMovie!.large_pic )!, placeholderImage: icon_image)
                     self.movieClassLabel.text = self.theMovie!.movie_class!
                     self.movieTitleLabel.text = self.theMovie!.title
                     self.movieTitleEngLabel.text = self.theMovie!.title_eng!

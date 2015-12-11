@@ -184,7 +184,8 @@ class MovieViewController: UIViewController,UICollectionViewDelegateFlowLayout,U
         case 3:
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("MovieUpGoingCell", forIndexPath: indexPath) as! MovieUpGoingCell
             let theMovie = self.upGoingMovies[indexPath.row]
-            cell.image.kf_setImageWithURL(NSURL(string: theMovie.large_pic )!)
+            let icon_image = UIImage(named: "app_icon")
+            cell.image.kf_setImageWithURL(NSURL(string: theMovie.large_pic )!, placeholderImage: icon_image)
             cell.title.text = theMovie.title
             cell.pub_date.text = "上映:"+theMovie.publish_date!
             return cell
@@ -200,7 +201,8 @@ class MovieViewController: UIViewController,UICollectionViewDelegateFlowLayout,U
                 cell.rankLabel.hidden = true
             }
             cell.title.text = theMovie.title
-            cell.image.kf_setImageWithURL(NSURL(string: theMovie.large_pic )!)
+            let icon_image = UIImage(named: "app_icon")
+            cell.image.kf_setImageWithURL(NSURL(string: theMovie.large_pic )!, placeholderImage: icon_image)
             cell.cancelRating()
             if is_update_star{
                 cell.updateRatingSize(15)
@@ -214,7 +216,8 @@ class MovieViewController: UIViewController,UICollectionViewDelegateFlowLayout,U
             let theMovie = self.thisWeekMovies[indexPath.row]
             cell.rankLabel.hidden = true
             cell.title.text = theMovie.title
-            cell.image.kf_setImageWithURL(NSURL(string: theMovie.large_pic )!)
+            let icon_image = UIImage(named: "app_icon")
+            cell.image.kf_setImageWithURL(NSURL(string: theMovie.large_pic )!, placeholderImage: icon_image)
             cell.cancelRating()
             cell.update(theMovie.points/2.0)
             cell.pointLabel.text = String(format:"%.1f", theMovie.points) + "分"
@@ -225,7 +228,8 @@ class MovieViewController: UIViewController,UICollectionViewDelegateFlowLayout,U
             let theMovie = self.secondMovies[indexPath.row]
             cell.rankLabel.hidden = true
             cell.title.text = theMovie.title
-            cell.image.kf_setImageWithURL(NSURL(string: theMovie.large_pic )!)
+            let icon_image = UIImage(named: "app_icon")
+            cell.image.kf_setImageWithURL(NSURL(string: theMovie.large_pic )!, placeholderImage: icon_image)
             cell.cancelRating()
             cell.update(theMovie.points/2.0)
             cell.pointLabel.text = String(format:"%.1f", theMovie.points) + "分"

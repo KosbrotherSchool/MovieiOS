@@ -86,19 +86,18 @@ class TheaterTimeViewController: UIViewController,UICollectionViewDelegateFlowLa
         sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
             let cell_width = collectionView.frame.size.width-16
             
-            let font = UIFont(name: "Verdana", size: 18)
+            let font = UIFont.systemFontOfSize(17)
             let title = movieTimes[indexPath.row].movie_title! + movieTimes[indexPath.row].remark!
-            let title_height = self.heightForLabel(title, font: font!, width: cell_width - 136) + 16
+            let title_height = self.heightForLabel(title, font: font, width: cell_width - 136) + 16
             
             let num_for_one_rows: Int = Int((collectionView.frame.size.width - 166)/70) // count
             let movie_time = movieTimes[indexPath.row].movie_time!
             let time_array = movie_time.componentsSeparatedByString(",")
             var cell_height = 0
             if( time_array.count % num_for_one_rows ) > 0{
-                cell_height = Int( time_array.count / num_for_one_rows + 1) * 40 + 10 + Int(title_height)
+                cell_height = Int( time_array.count / num_for_one_rows + 1) * 40 + Int(title_height)-8
             }else{
-                cell_height = Int( time_array.count / num_for_one_rows) * 40 + 10 + Int(title_height)
-                
+                cell_height = Int( time_array.count / num_for_one_rows) * 40 + Int(title_height)-8
             }
             
             if cell_height <= 180 {
@@ -139,7 +138,8 @@ class TheaterTimeViewController: UIViewController,UICollectionViewDelegateFlowLa
         }
         
         let picURL = NSURL(string: movieTime.movie_photo! )!
-        cell.imageView.kf_setImageWithURL(picURL)
+        let icon_image = UIImage(named: "app_icon")
+        cell.imageView.kf_setImageWithURL(picURL, placeholderImage: icon_image)
         
         cell.times = movieTime.movie_time!.componentsSeparatedByString(",")
         cell.timeCollectionView.delegate = cell

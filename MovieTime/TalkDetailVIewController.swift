@@ -59,6 +59,10 @@ class TalkDetailVIewController: UIViewController,UICollectionViewDelegateFlowLay
         }
     }
     
+    override func viewWillDisappear(animated: Bool) {
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+    }
+    
     // MARK spacing of collectionview
     // spacing between rows
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {

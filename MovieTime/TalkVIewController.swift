@@ -94,11 +94,11 @@ class TalkVIewController: UIViewController,UICollectionViewDelegateFlowLayout,UI
     // MARK spacing of collectionview
     // spacing between rows
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
-        return 10.0
+        return 8.0
     }
     // spacing between items
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
-        return 10.0
+        return 8.0
     }
     
     func collectionView(collectionView: UICollectionView,layout collectionViewLayout: UICollectionViewLayout,
@@ -107,12 +107,20 @@ class TalkVIewController: UIViewController,UICollectionViewDelegateFlowLayout,UI
             case 4:
                 let cell_width = collectionView.frame.size.width-20
                 let font = UIFont.systemFontOfSize(19)
-                let cell_height = self.heightForLabel(self.favMessages[indexPath.row].title! , font: font, width: cell_width-150) + 43
+                var title_height = self.heightForLabel(self.favMessages[indexPath.row].title! , font: font, width: cell_width-150)
+                if (title_height > 46 ){
+                    title_height = 46
+                }
+                let cell_height =  title_height + 43
                 return CGSize(width: cell_width, height: cell_height)
             default:
                 let cell_width = collectionView.frame.size.width-20
                 let font = UIFont.systemFontOfSize(19)
-                let cell_height = self.heightForLabel(self.messages[indexPath.row].title , font: font, width: cell_width-150) + 43
+                var title_height = self.heightForLabel(self.messages[indexPath.row].title , font: font, width: cell_width-150)
+                if (title_height > 46 ){
+                    title_height = 46
+                }
+                let cell_height =  title_height + 43
                 return CGSize(width: cell_width, height: cell_height)
             }
             
@@ -122,7 +130,7 @@ class TalkVIewController: UIViewController,UICollectionViewDelegateFlowLayout,UI
     func collectionView(collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
         insetForSectionAtIndex section: Int) -> UIEdgeInsets {
-            return UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
+            return UIEdgeInsets(top: 8.0, left: 8.0, bottom: 8.0, right: 8.0)
     }
     
     // Mark Collection Data

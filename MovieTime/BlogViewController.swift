@@ -89,6 +89,13 @@ class BlogViewController: UIViewController,UICollectionViewDelegateFlowLayout,UI
     
     func refresh(sender:AnyObject)
     {
+        blogPosts.removeAll()
+        newses.removeAll()
+        collectionView.reloadData()
+        blogCurrentPage = 1
+        newsCurrentPage = 1
+        getBlogPosts(1)
+        getNewses(1)
         self.refreshControl.endRefreshing()
     }
     

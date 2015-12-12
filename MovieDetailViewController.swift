@@ -261,7 +261,18 @@ class MovieDetailViewController: UIViewController, UINavigationControllerDelegat
                     // set movie info here
                     let icon_image = UIImage(named: "app_icon")
                     self.movieImage.kf_setImageWithURL(NSURL(string: self.theMovie!.large_pic )!, placeholderImage: icon_image)
+                    
                     self.movieClassLabel.text = self.theMovie!.movie_class!
+                    if (self.theMovie!.movie_class!.rangeOfString("普") != nil){
+                        self.movieClassLabel.backgroundColor = UIColor(red:0.08, green:0.48, blue:0.13, alpha:1.0)
+                    }else if(self.theMovie!.movie_class!.rangeOfString("保") != nil){
+                        self.movieClassLabel.backgroundColor = UIColor(red:0.04, green:0.23, blue:0.53, alpha:1.0)
+                    }else if(self.theMovie!.movie_class!.rangeOfString("輔") != nil){
+                        self.movieClassLabel.backgroundColor = UIColor(red:0.96, green:0.53, blue:0.04, alpha:1.0)
+                    }else if(self.theMovie!.movie_class!.rangeOfString("限") != nil){
+                        self.movieClassLabel.backgroundColor = UIColor(red:0.84, green:0.11, blue:0.07, alpha:1.0)
+                    }
+                    
                     self.movieTitleLabel.text = self.theMovie!.title
                     self.movieTitleEngLabel.text = self.theMovie!.title_eng!
                     self.movieLengthLabel.text = "片長：" + self.theMovie!.movie_length!

@@ -31,7 +31,7 @@ class TheaterCell: UICollectionViewCell,UICollectionViewDelegateFlowLayout,UICol
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
             
-            let cell_width = 70
+            let cell_width = 65
             let cell_height = 30
             
             return CGSize(width: CGFloat(cell_width), height: CGFloat(cell_height))

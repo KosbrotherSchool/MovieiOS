@@ -80,6 +80,7 @@ class WriteMessageViewController: UIViewController,UICollectionViewDelegateFlowL
         
         tagCollectionView.delegate = self
         tagCollectionView.dataSource = self
+        
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -178,6 +179,15 @@ class WriteMessageViewController: UIViewController,UICollectionViewDelegateFlowL
             tag_string = tag
         }
         cell.backgroundColor = UIColor(red:1.00, green:0.60, blue:0.00, alpha:1.0)
+    }
+    
+    func collectionView(collectionView: UICollectionView,willDisplayCell cell: UICollectionViewCell,forItemAtIndexPath indexPath: NSIndexPath){
+        let tagCell = cell as! TagCell
+        if(tagCell.tagLabel.text == tag_string){
+            cell.backgroundColor = UIColor(red:1.00, green:0.60, blue:0.00, alpha:1.0)
+        }else{
+            cell.backgroundColor = UIColor.whiteColor()
+        }
     }
     
     func imageTapped(img: AnyObject)

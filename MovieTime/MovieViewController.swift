@@ -21,6 +21,7 @@ class MovieViewController: UIViewController,UICollectionViewDelegateFlowLayout,U
     var secondMovies = [Movie]()
     var upGoingMovies = [Movie]()
     var is_update_star = false
+    var refreshControl:UIRefreshControl!
     
     @IBOutlet weak var segmentControl: UISegmentedControl!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -41,6 +42,10 @@ class MovieViewController: UIViewController,UICollectionViewDelegateFlowLayout,U
         // Do any additional setup after loading the view, typically from a nib.
         collectionView.delegate = self
         collectionView.dataSource = self
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+        collectionView.addSubview(refreshControl)
+        
         let screenSize: CGRect = UIScreen.mainScreen().bounds
         if screenSize.width < 375{
             is_update_star = true
@@ -67,6 +72,19 @@ class MovieViewController: UIViewController,UICollectionViewDelegateFlowLayout,U
             segmentControl.selectedSegmentIndex = currentIndex + 1
         }
         self.resetCollectionView()
+    }
+    
+    func refresh(sender:AnyObject)
+    {
+        rankMovies.removeAll()
+        thisWeekMovies.removeAll()
+        secondMovies.removeAll()
+        upGoingMovies.removeAll()
+        getMovieTaipeiRanks()
+        getMovieThisWeek()
+        getSecondMovies()
+        getUpGoingMovies()
+        self.refreshControl.endRefreshing()
     }
     
     override func viewWillAppear(animated: Bool) {
